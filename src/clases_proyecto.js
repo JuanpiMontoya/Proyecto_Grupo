@@ -1,7 +1,12 @@
+let lista_Katas = [];
 
-function añadirkata(nombreKata){
-    let Kata = nombreKata
-    return Kata 
+function añadirkata(nombreKata) {
+    lista_Katas.push(nombreKata);
+    return lista_Katas[lista_Katas.length - 1];
 }
 
-export default añadirkata;
+function devolver_ListaKatas() {
+    return lista_Katas;
+}
+
+export { añadirkata, devolver_ListaKatas };
