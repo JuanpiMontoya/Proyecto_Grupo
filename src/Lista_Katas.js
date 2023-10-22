@@ -14,6 +14,17 @@ class ListaDeKatas {
     devolver_ListaKatas() {
     return this.lista_Katas;
     }
+
+    buscar_Titulo(titulo){
+      const expRegular = new RegExp(titulo, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getNombre())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
   }
 
 export default ListaDeKatas;
