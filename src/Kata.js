@@ -1,7 +1,8 @@
 class Kata {
-    constructor(nombre, descripcion) {
+    constructor(nombre, descripcion,dificultad) {
       this.nombre = nombre;
       this.descripcion = descripcion;
+      this.dificultad = dificultad;
     }
   
     getNombre() {
@@ -10,6 +11,10 @@ class Kata {
 
     getDescripcion() {
         return this.descripcion;
+    }
+
+    getDificultad() {
+        return this.dificultad;
     }
 }
 

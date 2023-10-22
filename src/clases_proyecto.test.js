@@ -10,9 +10,9 @@ describe("Katas", () => {
   it("Se permite añadir varios nombres de kata al proyecto", () => {
     const lista = new ListaDeKatas();
     // Se añaden varios katas a la lista nueva
-    lista.añadirkata("Kata - Calculadora String","");
-    lista.añadirkata("Kata - Punto de venta kata","");
-    lista.añadirkata("Kata - Kata bancario","");
+    lista.añadirkata("Kata - Calculadora String");
+    lista.añadirkata("Kata - Punto de venta kata");
+    lista.añadirkata("Kata - Kata bancario");
   
     // llenamos y verificamos que la todos los katas esten en la lista
     const listaPr = lista.devolver_ListaKatas();
@@ -23,9 +23,9 @@ describe("Katas", () => {
 
   it("Se permite añadir varios katas con la clase lista_katas", () => {
     const listaPr = new ListaDeKatas();
-    listaPr.añadirkata("Kata - Calculadora String","");
-    listaPr.añadirkata("Kata - Punto de venta kata","");
-    listaPr.añadirkata("Kata - Kata bancario","");
+    listaPr.añadirkata("Kata - Calculadora String");
+    listaPr.añadirkata("Kata - Punto de venta kata");
+    listaPr.añadirkata("Kata - Kata bancario");
 
     //verificamos que la todos los katas esten en la lista
     expect(listaPr.devolver_ListaKatas()[0].getNombre()).toContain("Kata - Calculadora String");
@@ -43,4 +43,14 @@ describe("Detalles de Katas", () => {
     const listaPr = lista.devolver_ListaKatas();
     expect(listaPr[0].getDescripcion()).toContain("Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
   });
+
+  it("Se permite meter el nombre, detalle de un kata y su dificultad", () => {
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media");
+
+    //verificamos que la descripcion del kata este en la lista
+    const listaPr = lista.devolver_ListaKatas();
+    expect(listaPr[0].getDificultad()).toContain("Media");
+  });
+
 });
