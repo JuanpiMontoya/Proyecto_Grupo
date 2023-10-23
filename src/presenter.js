@@ -39,8 +39,13 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener("submit",(event) => {
         event.preventDefault();
         const busqueda = event.target.elements["busqueda"].value;
-        // Llama al método de buscar título
-        const katasFiltradas = lista_Katas.buscar_Titulo(busqueda);
+        const tipoBusqueda = event.target.elements["tipo_busqueda"].value;
+
+        // Llama al método de busqueda adecuado
+        const katasFiltradas = tipoBusqueda === "nombre"
+            ? lista_Katas.buscar_Titulo(busqueda)
+            : lista_Katas.buscar_Descripcion(busqueda);
+            
         // Actualiza la lista solo a los resultados de la búsqueda
         cont_katas.innerHTML  = "";
         katasFiltradas.forEach(addKataToContainer);
