@@ -25,6 +25,17 @@ class ListaDeKatas {
       });
       return resultados;
     }
+
+    buscar_Descripcion(titulo){
+      const expRegular = new RegExp(titulo, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getDescripcion())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
   }
 
 export default ListaDeKatas;
