@@ -75,14 +75,23 @@ document.addEventListener("DOMContentLoaded", function() {
             nombreInput.type = "text";
             nombreInput.value = kata.getNombre();
             editForm.appendChild(nombreInput);
+
+            // Input para editar la descripción
+            const descripcionInput = document.createElement("input");
+            descripcionInput.type = "text";
+            descripcionInput.value = kata.getDescripcion();
+            editForm.appendChild(descripcionInput);
+
     
             // Botón para confirmar la edición
             const btnConfirmar = createElement("button","Confirmar");
             btnConfirmar.addEventListener("click", function () {
                 // Obtener los nuevos valores
                 const nuevoNombre = nombreInput.value;
+                const nuevaDescripcion = descripcionInput.value;
+                
                 // Aplicar los cambios
-                lista_Katas.editarKata(kata, nuevoNombre);
+                lista_Katas.editarKata(kata, nuevoNombre,nuevaDescripcion);
         
                 // Actualizar la kata
                 contenedorKata.removeChild(editForm);

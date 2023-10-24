@@ -19,6 +19,10 @@ class Kata {
     setNombre(nuevoNombre){
         this.nombre = nuevoNombre;
     }
+    setDescripcion(nuevaDescripcion){
+        this.descripcion = nuevaDescripcion;
+
+    }
 }
 
 export default Kata;
