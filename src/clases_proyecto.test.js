@@ -121,4 +121,11 @@ describe("Editar Katas", () => {
     lista.editarKata(kata_a_editar,"COBO")
     expect(kata_a_editar.getNombre()).toContain("COBO"); 
    });
+
+   it("Se permite actualizar la descripción  de kata seleccionada", () => { 
+    const lista = new ListaDeKatas();
+    let kata_a_editar =lista.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Fácil");
+    lista.editarKata(kata_a_editar,"COBO","nueva descripcion")
+    expect(kata_a_editar.getDescripcion()).toContain("nueva descripcion"); 
+   });
 }); 
