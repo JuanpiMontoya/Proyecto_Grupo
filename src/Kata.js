@@ -16,6 +16,7 @@ class Kata {
     getDificultad() {
         return this.dificultad;
     }
+
 }
 
 export default Kata;

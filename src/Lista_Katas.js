@@ -55,8 +55,6 @@ class ListaDeKatas {
       }
     }
 
-
-
-  }
+}
 
 export default ListaDeKatas;

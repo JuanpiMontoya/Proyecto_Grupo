@@ -59,6 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
          contenedorKata.appendChild(btnEliminar);
+        const btnEditar = createElement("button", "Editar");
+       
+        contenedorKata.appendChild(btnEditar);
         cont_katas.appendChild(contenedorKata);
     }
 

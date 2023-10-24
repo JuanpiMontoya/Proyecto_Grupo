@@ -106,7 +106,7 @@ describe("Busqueda de Katas", () => {
 describe("Eliminar Katas", () => {
   it("Se permite eliminar kata seleccionada", () => { 
     const lista = new ListaDeKatas();
-    let kata_a_eliminar =lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
+    let kata_a_eliminar =lista.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Fácil");
     lista.eliminarKata(kata_a_eliminar);
     expect(lista.devolver_ListaKatas()).not.toContain(kata_a_eliminar); // Lo que se hace con el .not.toContain es verificar que la lista no contenga la kata_a_eliminar
    });
