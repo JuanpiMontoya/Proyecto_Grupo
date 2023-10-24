@@ -48,6 +48,8 @@ class ListaDeKatas {
       return resultados;
     }
 
+
+
   }
 
 export default ListaDeKatas;
