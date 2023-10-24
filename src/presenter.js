@@ -52,6 +52,12 @@ document.addEventListener("DOMContentLoaded", function() {
         contenedorKata.appendChild(createElement("p", kata.getDescripcion()));
         contenedorKata.appendChild(createElement("p", `Dificultad: ${kata.getDificultad()}`)); 
         const btnEliminar = createElement("button", "Eliminar");
+        btnEliminar.addEventListener("click", function () {
+            if (confirm("¿Estás seguro de que deseas eliminar esta kata?")) {
+                lista_Katas.eliminarKata(kata);
+                cont_katas.removeChild(contenedorKata);
+            }
+        });
          contenedorKata.appendChild(btnEliminar);
         cont_katas.appendChild(contenedorKata);
     }
