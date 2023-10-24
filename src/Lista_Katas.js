@@ -48,6 +48,13 @@ class ListaDeKatas {
       return resultados;
     }
 
+    eliminarKata(kata){
+      const index = this.lista_Katas.indexOf(kata);
+      if (index !== -1){
+        this.lista_Katas.splice(index,1);
+      }
+    }
+
 
 
   }
