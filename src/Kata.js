@@ -16,7 +16,9 @@ class Kata {
     getDificultad() {
         return this.dificultad;
     }
-
+    setNombre(nuevoNombre){
+        this.nombre = nuevoNombre;
+    }
 }
 
 export default Kata;

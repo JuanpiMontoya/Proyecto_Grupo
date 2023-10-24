@@ -54,7 +54,9 @@ class ListaDeKatas {
         this.lista_Katas.splice(index,1);
       }
     }
-
+    editarKata(kata, nuevoNombre) {
+      kata.setNombre(nuevoNombre);
+  }
 }
 
 export default ListaDeKatas;

@@ -59,7 +59,44 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
          contenedorKata.appendChild(btnEliminar);
+         
+         
         const btnEditar = createElement("button", "Editar");
+        btnEditar.addEventListener("click",function() {
+            showEditForm(kata);
+        }); 
+        
+        function showEditForm(kata) {
+            // Crear formulario de edición
+            const editForm = document.createElement("form");
+        
+            // Input para editar el nombre
+            const nombreInput = document.createElement("input");
+            nombreInput.type = "text";
+            nombreInput.value = kata.getNombre();
+            editForm.appendChild(nombreInput);
+    
+            // Botón para confirmar la edición
+            const btnConfirmar = createElement("button","Confirmar");
+            btnConfirmar.addEventListener("click", function () {
+                // Obtener los nuevos valores
+                const nuevoNombre = nombreInput.value;
+                // Aplicar los cambios
+                lista_Katas.editarKata(kata, nuevoNombre);
+        
+                // Actualizar la kata
+                contenedorKata.removeChild(editForm);
+                contenedorKata.removeChild(btnConfirmar);
+                cont_katas.innerHTML = "";
+                lista_Katas.devolver_ListaKatas().forEach(addKataToContainer);
+                
+            });
+        
+            // Agregar formulario de edicion al contenedor
+            contenedorKata.appendChild(editForm);
+            contenedorKata.appendChild(btnConfirmar);
+        }
+
        
         contenedorKata.appendChild(btnEditar);
         cont_katas.appendChild(contenedorKata);
