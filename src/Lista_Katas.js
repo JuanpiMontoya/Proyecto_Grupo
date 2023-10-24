@@ -36,6 +36,18 @@ class ListaDeKatas {
       });
       return resultados;
     }
+
+    buscar_Dificultad(dificultad){
+      const expRegular = new RegExp(dificultad, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getDificultad())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
+
   }
 
 export default ListaDeKatas;
