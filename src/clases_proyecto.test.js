@@ -93,6 +93,14 @@ describe("Busqueda de Katas", () => {
     expect(katas[0].getDificultad()).toContain("Media");
   });
 
+  it("Permite buscar Katas por su dificultad: Facil", () => {
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
+    lista.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Fácil");
+    let busqueda = "Fácil";
+    let katas = lista.buscar_Dificultad(busqueda);
+    expect(katas[0].getDificultad()).toContain("Fácil");
+  });
 
   
 
