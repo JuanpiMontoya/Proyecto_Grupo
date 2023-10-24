@@ -101,7 +101,16 @@ describe("Busqueda de Katas", () => {
     let katas = lista.buscar_Dificultad(busqueda);
     expect(katas[0].getDificultad()).toContain("Fácil");
   });
+});
 
-  
+describe("Eliminar Katas", () => {
+  it("Se permite eliminar kata seleccionada", () => { 
+    const lista = new ListaDeKatas();
+    let kata_a_eliminar =lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
+    lista.eliminarKata(kata_a_eliminar);
+    expect(lista.devolver_ListaKatas()).not.toContain(kata_a_eliminar); // Lo que se hace con el .not.toContain es verificar que la lista no contenga la kata_a_eliminar
+   });
+
+
 
 });
