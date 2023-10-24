@@ -37,8 +37,8 @@ class ListaDeKatas {
       return resultados;
     }
 
-    buscar_Dificultad(dificultad){
-      const expRegular = new RegExp(dificultad, "i");
+    buscar_Dificultad(dificultadKata){
+      const expRegular = new RegExp(dificultadKata, "i");
       const resultados = [];
       this.lista_Katas.forEach(kata => {
         if (expRegular.test(kata.getDificultad())) {

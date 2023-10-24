@@ -74,7 +74,6 @@ describe("Busqueda de Katas", () => {
     expect(katas[0].getNombre()).toContain("Kata - Calculadora String");
   });
 
-
   it("Permite buscar Katas por su dificultad", () => {
     const lista = new ListaDeKatas();
     lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
@@ -83,6 +82,7 @@ describe("Busqueda de Katas", () => {
     let katas = lista.buscar_Dificultad(busqueda);
     expect(katas[0].getDificultad()).toContain("Difícil");
   });
+
 
   
 
