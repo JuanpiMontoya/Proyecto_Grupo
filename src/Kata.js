@@ -26,6 +26,7 @@ class Kata {
     setDificultad(nuevaDificultad){
         this.dificultad = nuevaDificultad;
     }
+
 }
 
 export default Kata;

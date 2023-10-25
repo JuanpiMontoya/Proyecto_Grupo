@@ -38,19 +38,15 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Por favor, complete todos los campos.");
         }
     });
-
-
-
-
-
     // Función para agregar katas a la lista
     function addKataToContainer(kata) {
         const contenedorKata = createElement("div");
         contenedorKata.className = "contenedor-kata";
-
+    
         contenedorKata.appendChild(createElement("h4", kata.getNombre()));
         contenedorKata.appendChild(createElement("p", kata.getDescripcion()));
-        contenedorKata.appendChild(createElement("p", `Dificultad: ${kata.getDificultad()}`)); 
+        contenedorKata.appendChild(createElement("p", `Dificultad: ${kata.getDificultad()}`));
+        // Eliminar una kata
         const btnEliminar = createElement("button", "Eliminar");
         btnEliminar.addEventListener("click", function () {
             if (confirm("¿Estás seguro de que deseas eliminar esta kata?")) {
@@ -58,30 +54,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 cont_katas.removeChild(contenedorKata);
             }
         });
-         contenedorKata.appendChild(btnEliminar);
-         
-         
+        contenedorKata.appendChild(btnEliminar);
+        //Editar
         const btnEditar = createElement("button", "Editar");
-        btnEditar.addEventListener("click",function() {
-            showEditForm(kata);
-        }); 
-        
-        function showEditForm(kata) {
+        btnEditar.addEventListener("click", function () {
+            showEditForm(kata, contenedorKata);
+        });
+    
+        function showEditForm(kata, contenedorKata) {
             // Crear formulario de edición
             const editForm = document.createElement("form");
-        
+    
             // Input para editar el nombre
             const nombreInput = document.createElement("input");
             nombreInput.type = "text";
             nombreInput.value = kata.getNombre();
             editForm.appendChild(nombreInput);
-
+    
             // Input para editar la descripción
             const descripcionInput = document.createElement("input");
             descripcionInput.type = "text";
             descripcionInput.value = kata.getDescripcion();
             editForm.appendChild(descripcionInput);
-             // Select para editar la dificultad
+    
+            // Select para editar la dificultad
             const dificultadSelect = document.createElement("select");
             const opcionesDificultad = ["Fácil", "Media", "Difícil"];
             opcionesDificultad.forEach(opcion => {
@@ -92,37 +88,45 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             dificultadSelect.value = kata.getDificultad();
             editForm.appendChild(dificultadSelect);
-
     
             // Botón para confirmar la edición
-            const btnConfirmar = createElement("button","Confirmar");
+            const btnConfirmar = createElement("button", "Confirmar");
             btnConfirmar.addEventListener("click", function () {
                 // Obtener los nuevos valores
                 const nuevoNombre = nombreInput.value;
                 const nuevaDescripcion = descripcionInput.value;
                 const nuevaDificultad = dificultadSelect.value;
-                
+    
                 // Aplicar los cambios
-                lista_Katas.editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad);
-        
-                // Actualizar la kata
+                lista_Katas.editarKata(kata, nuevoNombre, nuevaDescripcion, nuevaDificultad);
+    
+                // Actualizar la vista de la kata
+                updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad);
+    
+                // Eliminar el formulario y el botón de confirmar
                 contenedorKata.removeChild(editForm);
                 contenedorKata.removeChild(btnConfirmar);
-                cont_katas.innerHTML = "";
-                lista_Katas.devolver_ListaKatas().forEach(addKataToContainer);
-                
             });
-        
-            // Agregar formulario de edicion al contenedor
+    
+            // Agregar formulario de edición al contenedor
             contenedorKata.appendChild(editForm);
             contenedorKata.appendChild(btnConfirmar);
         }
-
-       
+    
         contenedorKata.appendChild(btnEditar);
         cont_katas.appendChild(contenedorKata);
     }
-
+    //Actualiza la vista de katas
+    function updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad) {
+        const nombreElement = contenedorKata.querySelector("h4");
+        const descripcionElement = contenedorKata.querySelector("p:nth-child(2)");
+        const dificultadElement = contenedorKata.querySelector("p:nth-child(3)");
+    
+        nombreElement.textContent = nuevoNombre;
+        descripcionElement.textContent = nuevaDescripcion;
+        dificultadElement.textContent = `Dificultad: ${nuevaDificultad}`;
+    }
+    
     //Añadimos los katas y su informacion respectiva 
     lista_Katas.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media");
     lista_Katas.añadirkata("Kata - Punto de venta kata","Cree una aplicación sencilla para escanear códigos de barras para vender productos.","Fácil");
