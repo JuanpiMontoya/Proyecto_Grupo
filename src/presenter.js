@@ -81,6 +81,17 @@ document.addEventListener("DOMContentLoaded", function() {
             descripcionInput.type = "text";
             descripcionInput.value = kata.getDescripcion();
             editForm.appendChild(descripcionInput);
+             // Select para editar la dificultad
+            const dificultadSelect = document.createElement("select");
+            const opcionesDificultad = ["Fácil", "Media", "Difícil"];
+            opcionesDificultad.forEach(opcion => {
+                const option = document.createElement("option");
+                option.value = opcion;
+                option.textContent = opcion;
+                dificultadSelect.appendChild(option);
+            });
+            dificultadSelect.value = kata.getDificultad();
+            editForm.appendChild(dificultadSelect);
 
     
             // Botón para confirmar la edición
@@ -89,9 +100,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Obtener los nuevos valores
                 const nuevoNombre = nombreInput.value;
                 const nuevaDescripcion = descripcionInput.value;
+                const nuevaDificultad = dificultadSelect.value;
                 
                 // Aplicar los cambios
-                lista_Katas.editarKata(kata, nuevoNombre,nuevaDescripcion);
+                lista_Katas.editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad);
         
                 // Actualizar la kata
                 contenedorKata.removeChild(editForm);
