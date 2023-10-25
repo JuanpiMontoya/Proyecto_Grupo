@@ -160,24 +160,38 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    const kataForm = document.querySelector("#form_añadir");
-    kataForm.addEventListener("submit", function(event) {
-        event.preventDefault();
+    const mostrarFormularioBtn = document.getElementById("mostrar-formulario");
+        const formulario = document.getElementById("form_añadir");
 
-        const nombreKata = document.querySelector("#nombre-kata").value;
-        const descripcionKata = document.querySelector("#descripcion-kata").value;
-        const dificultadKata = document.querySelector("#dificultad").value;
+        mostrarFormularioBtn.addEventListener("click", () => {
+            if (formulario.style.display === 'none' || formulario.style.display === '') {
+                formulario.style.display = 'block';
+            } else {
+                formulario.style.display = 'none';
+            }
+        });
 
-        const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
-        lista_Katas.añadirkata(nuevaKata);
+        const kataForm = document.querySelector("#form_añadir");
+        kataForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-        // Actualiza la lista con la nueva Kata
-        addKataToContainer(nuevaKata);
+            const nombreKata = document.querySelector("#nombre-kata").value;
+            const descripcionKata = document.querySelector("#descripcion-kata").value;
+            const dificultadKata = document.querySelector("#dificultad").value;
 
-        // Limpia los campos de entrada
-        document.querySelector("#nombre-kata").value = "";
-        document.querySelector("#descripcion-kata").value = "";
-        document.querySelector("#dificultad").value = "Fácil";
-    });
+            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
+            lista_Katas.añadirkata(nuevaKata);
+    
+            // Actualiza la lista con la nueva Kata
+            addKataToContainer(nuevaKata);
+    
+            // Limpia los campos de entrada
+            document.querySelector("#nombre-kata").value = "";
+            document.querySelector("#descripcion-kata").value = "";
+            document.querySelector("#dificultad").value = "Fácil";
+
+            // Oculta el formulario después de añadir la Kata
+            formulario.style.display = 'none';
+        });
 
 });

@@ -98,3 +98,10 @@ h2 {
   font-family: "Trebuchet MS"; 
   font-size:30px;
 }
+
+h2#mostrar-formulario {
+  cursor: pointer; /* Cambia el cursor a una mano cuando pasa sobre el h2 */
+}
+h2#mostrar-formulario:hover {
+  color: red; /* Cambia el color del texto cuando se pasa el cursor sobre el h2 */
+}
