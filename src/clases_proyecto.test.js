@@ -165,6 +165,15 @@ describe("Editar Katas", () => {
   });
   
 
+  it("Se permite actualizar el estado de la kata seleccionada", () => { 
+    const lista = new ListaDeKatas();
+    let kata_a_editar =lista.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Fácil", "Terminado");
+    lista.editarKata(kata_a_editar,"COBO","nueva descripcion","Media", "No Terminado")
+    expect(kata_a_editar.getEstado()).toContain("No Terminado"); 
+   });
+
+  
+
 
 
 }); 

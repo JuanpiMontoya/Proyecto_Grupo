@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const nombreInput = document.querySelector("#nombre-kata");
     const descripcionInput = document.querySelector("#descripcion-kata");
     const dificultadSelect = document.querySelector("#dificultad");
+
     const añadirButton = document.querySelector("form#form_añadir button[type='submit']");
 
    
@@ -106,6 +107,17 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             dificultadSelect.value = kata.getDificultad();
             editForm.appendChild(dificultadSelect);
+
+            const estadoSelect = document.createElement("select");
+            const opcionesEstado = ["Terminado", "No Terminado"];
+            opcionesEstado.forEach(opcion => {
+                const option = document.createElement("option");
+                option.value = opcion;
+                option.textContent = opcion;
+                estadoSelect.appendChild(option);
+            });
+            estadoSelect.value = kata.getEstado();
+            editForm.appendChild(estadoSelect);
     
             // Botón para confirmar la edición
             const btnConfirmar = createElement("button", "Confirmar");
@@ -114,12 +126,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 const nuevoNombre = nombreInput.value;
                 const nuevaDescripcion = descripcionInput.value;
                 const nuevaDificultad = dificultadSelect.value;
+                const nuevoEstado = estadoSelect.value;
     
                 // Aplicar los cambios
-                lista_Katas.editarKata(kata, nuevoNombre, nuevaDescripcion, nuevaDificultad);
+                lista_Katas.editarKata(kata, nuevoNombre, nuevaDescripcion, nuevaDificultad, nuevoEstado);
     
                 // Actualizar la vista de la kata
-                updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad);
+                updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad, nuevoEstado);
     
                 // Eliminar el formulario y el botón de confirmar
                 contenedorKata.removeChild(editForm);
@@ -203,8 +216,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const nombreKata = document.querySelector("#nombre-kata").value;
             const descripcionKata = document.querySelector("#descripcion-kata").value;
             const dificultadKata = document.querySelector("#dificultad").value;
+            const estadoKata = document.querySelector("#estado").value;
 
-            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
+            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata, estadoKata);
             lista_Katas.añadirkata(nuevaKata);
     
             // Actualiza la lista con la nueva Kata
@@ -214,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector("#nombre-kata").value = "";
             document.querySelector("#descripcion-kata").value = "";
             document.querySelector("#dificultad").value = "Fácil";
+            document.querySelector("#estado").value = "No Terminado";
 
             // Oculta el formulario después de añadir la Kata
             formulario.style.display = 'none';
