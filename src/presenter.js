@@ -1,4 +1,5 @@
 import ListaDeKatas from "./Lista_Katas.js";
+import Kata from "./Kata.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const cont_katas = document.querySelector("#katas-disponibles");
@@ -12,6 +13,34 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         return element;
     }
+
+    const nombreInput = document.querySelector("#nombre-kata");
+    const descripcionInput = document.querySelector("#descripcion-kata");
+    const dificultadSelect = document.querySelector("#dificultad");
+    const añadirButton = document.querySelector("form#form_añadir button[type='submit']");
+
+    añadirButton.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        const nombre = nombreInput.value;
+        const descripcion = descripcionInput.value;
+        const dificultad = dificultadSelect.value;
+
+
+        if (nombre && descripcion && dificultad) {
+            const nuevaKata = new Kata(nombre, descripcion, dificultad);
+            lista_Katas.añadirkata(nuevaKata);
+            nombreInput.value = "";
+            descripcionInput.value = "";
+
+            addKataToContainer(nuevaKata);
+        } else {
+            alert("Por favor, complete todos los campos.");
+        }
+    });
+
+
+
 
     // Función para agregar katas a la lista
     function addKataToContainer(kata) {
@@ -57,4 +86,24 @@ document.addEventListener("DOMContentLoaded", function() {
         katasFiltradas.forEach(addKataToContainer);
     });
 
+});
+
+const kataForm = document.querySelector("#form_añadir");
+kataForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const nombreKata = document.querySelector("#nombre-kata").value;
+    const descripcionKata = document.querySelector("#descripcion-kata").value;
+    const dificultadKata = document.querySelector("#dificultad").value;
+
+    const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
+    lista_Katas.añadirkata(nuevaKata);
+
+    // Actualiza la lista con la nueva Kata
+    addKataToContainer(nuevaKata);
+
+    // Limpia los campos de entrada
+    document.querySelector("#nombre-kata").value = "";
+    document.querySelector("#descripcion-kata").value = "";
+    document.querySelector("#dificultad").value = "Fácil";
 });
