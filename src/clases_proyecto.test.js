@@ -143,6 +143,15 @@ describe("Editar Katas", () => {
     expect(kata_a_editar.getDescripcion()).toContain("nueva descripcion"); 
     expect(kata_a_editar.getDificultad()).toContain("Media");
     expect(kata_a_editar.getNombre()).toContain("COBO"); 
+   }); 
+}); 
+
+describe("Estado Katas Buscar", () => {
+  it("Se permite añadir el estado de una kata", () => { 
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora String","Realiza una calculadora con strings","Facil","No Terminado");
+    const listaPr = lista.devolver_ListaKatas();
+    expect(listaPr[0].getEstado()).toContain("No Terminado");
    });
 
 }); 

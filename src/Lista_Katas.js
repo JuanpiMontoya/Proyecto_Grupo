@@ -5,8 +5,8 @@ class ListaDeKatas {
       this.lista_Katas = [];
     }
 
-    añadirkata(nombreKata,descKata,difKata) {
-        const KataNuevo = new Kata(nombreKata,descKata,difKata);
+    añadirkata(nombreKata,descKata,difKata,estKata) {
+        const KataNuevo = new Kata(nombreKata,descKata,difKata,estKata);
         this.lista_Katas.push(KataNuevo);
         return this.lista_Katas[this.lista_Katas.length - 1];
     }
