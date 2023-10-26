@@ -30,6 +30,9 @@ class Kata {
     setDificultad(nuevaDificultad){
         this.dificultad = nuevaDificultad;
     }
+    setEstado(nuevoEstado){
+        this.estado = nuevoEstado;
+    }
 
 }
 
