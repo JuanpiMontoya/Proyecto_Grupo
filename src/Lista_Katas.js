@@ -64,10 +64,11 @@ class ListaDeKatas {
         this.lista_Katas.splice(index,1);
       }
     }
-    editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad) {
+    editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad,nuevoEstado) {
       kata.setNombre(nuevoNombre);
       kata.setDescripcion(nuevaDescripcion);
       kata.setDificultad(nuevaDificultad);
+      kata.setEstado(nuevoEstado);
   }
 }
 

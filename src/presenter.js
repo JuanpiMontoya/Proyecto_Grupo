@@ -182,8 +182,11 @@ document.addEventListener("DOMContentLoaded", function() {
             const nombreKata = document.querySelector("#nombre-kata").value;
             const descripcionKata = document.querySelector("#descripcion-kata").value;
             const dificultadKata = document.querySelector("#dificultad").value;
+            const estadoKata = document.querySelector("#estado").value;
+            
+        
 
-            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
+            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata,estadoKata);
             lista_Katas.añadirkata(nuevaKata);
     
             // Actualiza la lista con la nueva Kata
@@ -193,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
             document.querySelector("#nombre-kata").value = "";
             document.querySelector("#descripcion-kata").value = "";
             document.querySelector("#dificultad").value = "Fácil";
+            document.querySelector("#dificultad").value = "NOTerminado";
 
             // Oculta el formulario después de añadir la Kata
             formulario.style.display = 'none';
