@@ -154,4 +154,17 @@ describe("Estado Katas Buscar", () => {
     expect(listaPr[0].getEstado()).toContain("No Terminado");
    });
 
+   it("Se permite añadir el estado a la lista de katas", () => { 
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata 1","Desc1","Facil","No Terminado");
+    lista.añadirkata("Kata 2","Desc1","Dificil","Terminado");
+    lista.añadirkata("Kata 3","Desc1","Medio","Terminado");
+    lista.añadirkata("Kata 4","Desc1","Medio","No Terminado");
+
+    const listaPr = lista.devolver_ListaKatas();
+    expect(listaPr[0].getEstado()).toContain("No Terminado");
+    expect(listaPr[1].getEstado()).toContain("Terminado");
+    expect(listaPr[2].getEstado()).toContain("Terminado");
+    expect(listaPr[3].getEstado()).toContain("No Terminado");
+   });
 }); 
