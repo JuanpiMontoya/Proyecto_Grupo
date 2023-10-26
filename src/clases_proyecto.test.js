@@ -155,6 +155,14 @@ describe("Editar Katas", () => {
     expect(katas[0].getEstado()).toContain("Terminado");
   });
 
+  it("Permite buscar Katas su estado: No Terminado", () => {
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora ","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica");
+    lista.añadirkata("Kata - Kata banca","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Fácil", "No Terminado");
+    let busqueda = "No Terminado";
+    let katas = lista.buscar_EstadoKata(busqueda);
+    expect(katas[0].getEstado()).toContain("No Terminado");
+  });
   
 
 
