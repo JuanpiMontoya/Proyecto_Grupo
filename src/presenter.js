@@ -151,13 +151,17 @@ document.addEventListener("DOMContentLoaded", function() {
             katasFiltradas = lista_Katas.buscar_Descripcion(busqueda);
         } else if (tipoBusqueda === "dificultad") {
             katasFiltradas = lista_Katas.buscar_Dificultad(busqueda);
+        } else if(tipoBusqueda === "estado"){
+            if(busquedaEstado === "terminado"){
+                katasFiltradas = lista_Katas.buscar_Estado("Terminado");
+            }
+            else if(busquedaEstado === "no_terminado"){
+                katasFiltradas = lista_Katas.buscar_Estado("No Terminado");
+            }
         } else {
             katasFiltradas = [];
         }
 
-        if(busquedaEstado === "Terminado"){
-            katasFiltradas = lista_Katas.buscar_Estado("Terminado");
-        }
         
     
         // Actualiza la lista solo con los resultados de la búsqueda

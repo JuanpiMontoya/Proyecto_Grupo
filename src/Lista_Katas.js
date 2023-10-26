@@ -61,10 +61,9 @@ class ListaDeKatas {
     }
 
     buscar_Estado(estado){
-      const expRegular = new RegExp(estado, "i");
       const resultados = [];
       this.lista_Katas.forEach(kata => {
-        if (expRegular.test(kata.getEstado())) {
+        if (kata.getEstado() === estado) {
           resultados.push(kata);
         }
       });
