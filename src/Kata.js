@@ -3,7 +3,14 @@ class Kata {
       this.nombre = nombre;
       this.descripcion = descripcion;
       this.dificultad = dificultad;
-      this.estado = estado;
+      if(estado == "Terminado" || estado == "No Terminado")
+      {
+        this.estado = estado;
+      }
+      else
+      {
+        this.estado = "";
+      }
     }
   
     getNombre() {

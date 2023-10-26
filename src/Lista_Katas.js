@@ -6,9 +6,9 @@ class ListaDeKatas {
     }
 
     añadirkata(nombreKata,descKata,difKata,estKata) {
-        const KataNuevo = new Kata(nombreKata,descKata,difKata,estKata);
-        this.lista_Katas.push(KataNuevo);
-        return this.lista_Katas[this.lista_Katas.length - 1];
+      const KataNuevo = new Kata(nombreKata,descKata,difKata,estKata);
+      this.lista_Katas.push(KataNuevo);
+      return this.lista_Katas[this.lista_Katas.length - 1];   
     }
 
     devolver_ListaKatas() {
