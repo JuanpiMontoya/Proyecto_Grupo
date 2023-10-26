@@ -4,6 +4,9 @@ class Kata {
       this.descripcion = descripcion;
       this.dificultad = dificultad;
       this.estado = estado;
+      if(estado == undefined){
+        this.estado = "No Terminado"
+      }
     }
   
     getNombre() {

@@ -164,3 +164,12 @@ describe("Buscar por Estado", () => {
     expect(katas[0].getEstado()).toEqual("No Terminado");
    });
 });
+
+describe("Editar Estado de Kata", () => {
+  it("Al crear una kata, el estado por defecto es <No terminado>", () => { 
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Fácil");
+    expect(lista.devolver_ListaKatas()[0].getEstado()).toContain("No Terminado");
+   });
+
+});
