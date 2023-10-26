@@ -128,9 +128,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     //Añadimos los katas y su informacion respectiva 
-    lista_Katas.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media");
-    lista_Katas.añadirkata("Kata - Punto de venta kata","Cree una aplicación sencilla para escanear códigos de barras para vender productos.","Fácil");
-    lista_Katas.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil");
+    lista_Katas.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media","Terminado");
+    lista_Katas.añadirkata("Kata - Punto de venta kata","Cree una aplicación sencilla para escanear códigos de barras para vender productos.","Fácil", "No Terminado");
+    lista_Katas.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil","No Terminado");
     const katas_disp = lista_Katas.devolver_ListaKatas();
 
     //Llenado dinamico del Kata
@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const busqueda = event.target.elements["busqueda"].value;
         const tipoBusqueda = event.target.elements["tipo_busqueda"].value;
+        const busquedaEstado = event.target.elements["estado"].value;
     
         let katasFiltradas;
     
@@ -153,6 +154,11 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             katasFiltradas = [];
         }
+
+        if(busquedaEstado === "Terminado"){
+            katasFiltradas = lista_Katas.buscar_Estado("Terminado");
+        }
+        
     
         // Actualiza la lista solo con los resultados de la búsqueda
         cont_katas.innerHTML = "";
