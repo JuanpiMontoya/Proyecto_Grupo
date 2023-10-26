@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const nombre = nombreInput.value;
         const descripcion = descripcionInput.value;
         const dificultad = dificultadSelect.value;
-    
+        const estado = "No Terminado"
        
-        if (nombre && descripcion && dificultad) {
-            const nuevaKata = new Kata(nombre, descripcion, dificultad);
+        if (nombre && descripcion && dificultad && estado) {
+            const nuevaKata = new Kata(nombre, descripcion, dificultad,estado);
             lista_Katas.añadirkata(nuevaKata);
             nombreInput.value = "";
             descripcionInput.value = "";
@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function() {
             alert("Por favor, complete todos los campos.");
         }
     });
+
+
     // Función para agregar katas a la lista
     function addKataToContainer(kata) {
         const contenedorKata = createElement("div");
@@ -117,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function() {
         contenedorKata.appendChild(btnEditar);
         cont_katas.appendChild(contenedorKata);
     }
+
+
+
+
     //Actualiza la vista de katas
     function updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad) {
         const nombreElement = contenedorKata.querySelector("h4");
@@ -182,8 +188,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const nombreKata = document.querySelector("#nombre-kata").value;
             const descripcionKata = document.querySelector("#descripcion-kata").value;
             const dificultadKata = document.querySelector("#dificultad").value;
+            const estadoKata = "No Terminado";
 
-            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata);
+            const nuevaKata = new Kata(nombreKata, descripcionKata, dificultadKata,estadoKata);
             lista_Katas.añadirkata(nuevaKata);
     
             // Actualiza la lista con la nueva Kata
