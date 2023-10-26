@@ -5,8 +5,8 @@ class ListaDeKatas {
       this.lista_Katas = [];
     }
 
-    añadirkata(nombreKata,descKata,difKata) {
-        const KataNuevo = new Kata(nombreKata,descKata,difKata);
+    añadirkata(nombreKata,descKata,difKata, estado) {
+        const KataNuevo = new Kata(nombreKata,descKata,difKata, estado);
         this.lista_Katas.push(KataNuevo);
         return this.lista_Katas[this.lista_Katas.length - 1];
     }
@@ -54,11 +54,19 @@ class ListaDeKatas {
         this.lista_Katas.splice(index,1);
       }
     }
-    editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad) {
+    editarKata(kata, nuevoNombre,nuevaDescripcion,nuevaDificultad, nuevoEstado) {
       kata.setNombre(nuevoNombre);
       kata.setDescripcion(nuevaDescripcion);
       kata.setDificultad(nuevaDificultad);
+      kata.setEstado(nuevoEstado)
   }
+
+  buscar_EstadoKata(estado){
+    const katasFiltradas = this.lista_Katas.filter(kata => kata.getEstado() === estado);
+    return katasFiltradas;
+  }
+
+
 }
 
 export default ListaDeKatas;

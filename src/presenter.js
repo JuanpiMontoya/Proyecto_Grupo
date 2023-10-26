@@ -14,10 +14,26 @@ document.addEventListener("DOMContentLoaded", function() {
         return element;
     }
 
+    const estadoForm = document.querySelector("#form_buscar_estado"); 
+    estadoForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const estadoSeleccionado = document.querySelector('input[name="estado"]:checked').value;
+    
+    // Filtra las Katas por estado
+    const katasEncontradas = buscarKatasPorEstado(estadoSeleccionado);
+
+    // Actualiza la lista de Katas en el HTML
+    updateKataList(katasEncontradas);
+});
+
+
+
     const nombreInput = document.querySelector("#nombre-kata");
     const descripcionInput = document.querySelector("#descripcion-kata");
     const dificultadSelect = document.querySelector("#dificultad");
     const añadirButton = document.querySelector("form#form_añadir button[type='submit']");
+
+   
     
     añadirButton.addEventListener("click", function(event) {
         event.preventDefault();
@@ -25,10 +41,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const nombre = nombreInput.value;
         const descripcion = descripcionInput.value;
         const dificultad = dificultadSelect.value;
+        const estado = estadoSelect.value;
     
        
-        if (nombre && descripcion && dificultad) {
-            const nuevaKata = new Kata(nombre, descripcion, dificultad);
+        if (nombre && descripcion && dificultad && estado) {
+            const nuevaKata = new Kata(nombre, descripcion, dificultad, estado);
             lista_Katas.añadirkata(nuevaKata);
             nombreInput.value = "";
             descripcionInput.value = "";
@@ -46,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
         contenedorKata.appendChild(createElement("h4", kata.getNombre()));
         contenedorKata.appendChild(createElement("p", kata.getDescripcion()));
         contenedorKata.appendChild(createElement("p", `Dificultad: ${kata.getDificultad()}`));
+        contenedorKata.appendChild(createElement("p", `Estado: ${kata.getEstado()}`));
         // Eliminar una kata
         const btnEliminar = createElement("button", "Eliminar");
         btnEliminar.addEventListener("click", function () {
@@ -117,20 +135,25 @@ document.addEventListener("DOMContentLoaded", function() {
         cont_katas.appendChild(contenedorKata);
     }
     //Actualiza la vista de katas
-    function updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad) {
+    function updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad, nuevoEstado) {
         const nombreElement = contenedorKata.querySelector("h4");
         const descripcionElement = contenedorKata.querySelector("p:nth-child(2)");
         const dificultadElement = contenedorKata.querySelector("p:nth-child(3)");
+        const estadoElement = contenedorKata.querySelector("p:nth-child(4)")
     
         nombreElement.textContent = nuevoNombre;
         descripcionElement.textContent = nuevaDescripcion;
         dificultadElement.textContent = `Dificultad: ${nuevaDificultad}`;
+        estadoElement.textContent = `Estado: ${nuevoEstado}`;
+
     }
     
     //Añadimos los katas y su informacion respectiva 
-    lista_Katas.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media");
-    lista_Katas.añadirkata("Kata - Punto de venta kata","Cree una aplicación sencilla para escanear códigos de barras para vender productos.","Fácil");
-    lista_Katas.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil");
+    lista_Katas.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Media", "No Terminado");
+    lista_Katas.añadirkata("Kata - Punto de venta kata","Cree una aplicación sencilla para escanear códigos de barras para vender productos.","Fácil", "No Terminado");
+    lista_Katas.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil", "Terminado");
+    lista_Katas.añadirkata("Kata - Kata banco","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil", "Terminado")
+
     const katas_disp = lista_Katas.devolver_ListaKatas();
 
     //Llenado dinamico del Kata
@@ -158,6 +181,8 @@ document.addEventListener("DOMContentLoaded", function() {
         cont_katas.innerHTML = "";
         katasFiltradas.forEach(addKataToContainer);
     });
+
+
 
 
     const mostrarFormularioBtn = document.getElementById("mostrar-formulario");
@@ -193,5 +218,8 @@ document.addEventListener("DOMContentLoaded", function() {
             // Oculta el formulario después de añadir la Kata
             formulario.style.display = 'none';
         });
+
+
+
 
 });
