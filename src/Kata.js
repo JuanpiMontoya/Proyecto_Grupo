@@ -1,8 +1,9 @@
 class Kata {
-    constructor(nombre, descripcion,dificultad) {
+    constructor(nombre, descripcion,dificultad,estado) {
       this.nombre = nombre;
       this.descripcion = descripcion;
       this.dificultad = dificultad;
+      this.estado = estado;
     }
   
     getNombre() {
@@ -16,6 +17,9 @@ class Kata {
     getDificultad() {
         return this.dificultad;
     }
+    getEstado(){
+        return this.estado;
+    }
     setNombre(nuevoNombre){
         this.nombre = nuevoNombre;
     }
@@ -26,6 +30,7 @@ class Kata {
     setDificultad(nuevaDificultad){
         this.dificultad = nuevaDificultad;
     }
+
 
 }
 

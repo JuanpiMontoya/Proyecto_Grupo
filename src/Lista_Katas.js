@@ -5,8 +5,8 @@ class ListaDeKatas {
       this.lista_Katas = [];
     }
 
-    añadirkata(nombreKata,descKata,difKata) {
-        const KataNuevo = new Kata(nombreKata,descKata,difKata);
+    añadirkata(nombreKata,descKata,difKata,estadoKata) {
+        const KataNuevo = new Kata(nombreKata,descKata,difKata,estadoKata);
         this.lista_Katas.push(KataNuevo);
         return this.lista_Katas[this.lista_Katas.length - 1];
     }
@@ -58,7 +58,18 @@ class ListaDeKatas {
       kata.setNombre(nuevoNombre);
       kata.setDescripcion(nuevaDescripcion);
       kata.setDificultad(nuevaDificultad);
-  }
+    }
+
+    buscar_Estado(estado){
+      const expRegular = new RegExp(estado, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getEstado())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
 }
 
 export default ListaDeKatas;

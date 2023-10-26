@@ -145,4 +145,14 @@ describe("Editar Katas", () => {
     expect(kata_a_editar.getNombre()).toContain("COBO"); 
    });
 
-}); 
+});
+
+describe("Buscar por Estado", () => {
+  it("Se permite buscar katas segun el estado: Terminado", () => { 
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata - Calculadora String","Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica","Fácil","Terminado");
+    lista.añadirkata("Kata - Kata bancario","Cree una aplicación bancaria sencilla con funciones de depósito, retiro e impresión de estados de cuenta, usando una clase pública, y utilizando cadenas y enteros para fechas y cantidades respectivamente.","Difícil","No Terminado");
+    let katas = lista.buscar_Estado("Terminado");
+    expect(katas[0].getEstado()).toEqual("Terminado");
+   });
+});
