@@ -190,5 +190,7 @@ describe("Editar Katas", () => {
     expect(kata_a_editar.getEstado()).toContain("Terminado"); 
    });
 
+  
+   
 
 }); 
