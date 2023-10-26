@@ -48,6 +48,17 @@ class ListaDeKatas {
       return resultados;
     }
 
+    buscar_Estado(estadoKata){
+      const expRegular = new RegExp(estadoKata, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getEstado())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
+
     eliminarKata(kata){
       const index = this.lista_Katas.indexOf(kata);
       if (index !== -1){
