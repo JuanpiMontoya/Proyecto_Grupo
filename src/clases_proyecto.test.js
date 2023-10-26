@@ -189,4 +189,13 @@ describe("Estado Katas Buscar", () => {
     expect(katas[0].getEstado()).toContain("Terminado");
   });
 
+  it("Permite buscar Katas por el estado No Terminado", () => {
+    const lista = new ListaDeKatas();
+    lista.añadirkata("Kata 1","Desc1","Facil","No Terminado");
+    lista.añadirkata("Kata 2","Desc1","Dificil","Terminado");
+    let busqueda = "No Terminado";
+    let katas = lista.buscar_Estado(busqueda);
+    expect(katas[0].getEstado()).toContain("No Terminado");
+  });
+
 }); 
