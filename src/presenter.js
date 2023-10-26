@@ -1,4 +1,5 @@
 import ListaDeKatas from "./Lista_Katas.js";
+import Kata from "./Kata.js";
 
 document.addEventListener("DOMContentLoaded", function() {
     const cont_katas = document.querySelector("#katas-disponibles");
@@ -13,6 +14,35 @@ document.addEventListener("DOMContentLoaded", function() {
         return element;
     }
 
+    const nombreInput = document.querySelector("#nombre-kata");
+    const descripcionInput = document.querySelector("#descripcion-kata");
+    const dificultadSelect = document.querySelector("#dificultad");
+    const añadirButton = document.querySelector("form#form_añadir button[type='submit']");
+
+    añadirButton.addEventListener("click", function(event) {
+        event.preventDefault();
+
+        const nombre = nombreInput.value;
+        const descripcion = descripcionInput.value;
+        const dificultad = dificultadSelect.value;
+
+
+        if (nombre && descripcion && dificultad) {
+            const nuevaKata = new Kata(nombre, descripcion, dificultad);
+            lista_Katas.añadirkata(nuevaKata);
+            nombreInput.value = "";
+            descripcionInput.value = "";
+
+            addKataToContainer(nuevaKata);
+        } else {
+            alert("Por favor, complete todos los campos.");
+        }
+    });
+
+
+
+
+    
     // Función para agregar katas a la lista
     function addKataToContainer(kata) {
         const contenedorKata = createElement("div");
