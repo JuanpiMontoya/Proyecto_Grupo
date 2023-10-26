@@ -73,3 +73,28 @@ hr{
   background-color: black;
   border: none;
 }
+
+#form_añadir {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#form_añadir input,
+#form_añadir select,
+#form_añadir button {
+  margin: 5px;
+}
+
+#form_añadir button {
+  padding: 10px 20px;
+}
+
+h2 {
+
+  padding: 0; 
+  text-align: center;
+  font-family: "Trebuchet MS"; 
+  font-size:30px;
+}
