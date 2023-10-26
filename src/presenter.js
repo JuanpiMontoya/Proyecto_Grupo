@@ -40,14 +40,20 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const busqueda = event.target.elements["busqueda"].value;
         const tipoBusqueda = event.target.elements["tipo_busqueda"].value;
+        let katasFiltradas;
 
-        // Llama al método de busqueda adecuado
-        const katasFiltradas = tipoBusqueda === "nombre"
-            ? lista_Katas.buscar_Titulo(busqueda)
-            : lista_Katas.buscar_Descripcion(busqueda);
-            
-        // Actualiza la lista solo a los resultados de la búsqueda
-        cont_katas.innerHTML  = "";
+        if (tipoBusqueda === "nombre") {
+            katasFiltradas = lista_Katas.buscar_Titulo(busqueda);
+        } else if (tipoBusqueda === "descripcion") {
+            katasFiltradas = lista_Katas.buscar_Descripcion(busqueda);
+        } else if (tipoBusqueda === "dificultad") {
+            katasFiltradas = lista_Katas.buscar_Dificultad(busqueda);
+        } else {
+            katasFiltradas = [];
+        }
+
+        // Actualiza la lista solo con los resultados de la búsqueda
+        cont_katas.innerHTML = "";
         katasFiltradas.forEach(addKataToContainer);
     });
 });
