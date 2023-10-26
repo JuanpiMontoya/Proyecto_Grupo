@@ -5,8 +5,8 @@ class ListaDeKatas {
       this.lista_Katas = [];
     }
 
-    añadirkata(nombreKata,descKata,difKata) {
-        const KataNuevo = new Kata(nombreKata,descKata,difKata);
+    añadirkata(nombreKata,descKata,difKata,estKata) {
+        const KataNuevo = new Kata(nombreKata,descKata,difKata,estKata);
         this.lista_Katas.push(KataNuevo);
         return this.lista_Katas[this.lista_Katas.length - 1];
     }
@@ -42,6 +42,16 @@ class ListaDeKatas {
       const resultados = [];
       this.lista_Katas.forEach(kata => {
         if (expRegular.test(kata.getDificultad())) {
+          resultados.push(kata);
+        }
+      });
+      return resultados;
+    }
+    buscar_Estado(estadoKata){
+      const expRegular = new RegExp(estadoKata, "i");
+      const resultados = [];
+      this.lista_Katas.forEach(kata => {
+        if (expRegular.test(kata.getEstado())) {
           resultados.push(kata);
         }
       });
