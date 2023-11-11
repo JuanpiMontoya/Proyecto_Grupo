@@ -40,6 +40,9 @@ describe("Buscar Katas", () => {
 
 
 
+});
+
+
 describe('Añadir nueva kata', () => {
     it('Debe mostrar, ocultar el formulario y poder añadir una nueva kata', () => {
       cy.visit("/");
@@ -57,6 +60,17 @@ describe('Añadir nueva kata', () => {
     });
   });
 
-  
+  describe('Eliminar kata', () => {
+    it('Se verifica que se haya eliminado una kata de las iniciales, deberia mostrar 2 katas', () => {
+      cy.visit("/");
+      cy.get('.contenedor-kata').its('length').then(initialCount => {
+        if (initialCount > 0) {
+          cy.get('.contenedor-kata').first().as('kata');
+          cy.get('@kata').contains('Eliminar').click();
+          cy.on('window:confirm', () => true);
+          cy.get('.contenedor-kata').should('have.length', initialCount - 1);
+        }
+      });
+    });
+  });
 
-});
