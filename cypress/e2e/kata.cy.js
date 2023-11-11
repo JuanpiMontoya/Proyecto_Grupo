@@ -74,3 +74,20 @@ describe('Añadir nueva kata', () => {
     });
   });
 
+  describe('Editar kata', () => {
+    it('Se verifica que se haya editado el nombre de un kata correctamente', () => {
+      cy.visit("/");
+      cy.get('.contenedor-kata').first().as('kata');
+      cy.get('@kata').contains('Editar').click();
+      cy.get('@kata').find('input[type="text"]').should('have.length', 2);
+      const nuevoNombre= 'La Chulo Kata';
+      const nuevaDescripcion='pongan bachata en tdd';
+      const nuevaDificultad='Media';
+      cy.get('@kata').find('input[type="text"]').eq(0).clear().type(nuevoNombre);
+      cy.get('@kata').find('input[type="text"]').eq(1).clear().type(nuevaDescripcion);
+      cy.get('@kata').find('select').select(nuevaDificultad);
+      cy.get('@kata').contains('Confirmar').click();     
+    });
+  });
+
+
