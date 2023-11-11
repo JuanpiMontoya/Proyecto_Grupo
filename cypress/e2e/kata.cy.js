@@ -37,4 +37,26 @@ describe("Buscar Katas", () => {
         cy.get('#btn_busqueda').click();
         cy.get('.contenedor-kata').find('span').should('have.text', 'Dificultad: Fácil');
     });
+
+
+
+describe('Añadir nueva kata', () => {
+    it('Debe mostrar, ocultar el formulario y poder añadir una nueva kata', () => {
+      cy.visit("/");
+  
+      cy.get('#form_añadir').should('not.be.visible');
+  
+      cy.get('#mostrar-formulario').click();
+      cy.get('#form_añadir').should('be.visible');
+      cy.get('#nombre-kata').type('Nombre de prueba');
+      cy.get('#descripcion-kata').type('Descripción de prueba');
+      cy.get('#dificultad').select('Fácil');
+      cy.get('#form_añadir').submit();
+  
+      cy.get('#form_añadir').should('not.be.visible');
+    });
+  });
+
+  
+
 });
