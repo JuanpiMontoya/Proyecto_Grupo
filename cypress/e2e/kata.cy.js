@@ -21,4 +21,12 @@ describe("Buscar Katas", () => {
         cy.get('#btn_busqueda').click();
         cy.get('.contenedor-kata').find('h4').should('have.text', 'Kata - Calculadora String');
     });
+
+    it("Se filtran resultados segun los criterios de búsqueda (descripción)", () => {
+        cy.visit("/");
+        cy.get('#tipo_busqueda').select("descripcion");
+        cy.get('#busqueda').type("Calculadora");
+        cy.get('#btn_busqueda').click();
+        cy.get('.contenedor-kata').find('p').should('have.text', 'Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica');
+    });
 });
