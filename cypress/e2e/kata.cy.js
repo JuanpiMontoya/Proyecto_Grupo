@@ -75,7 +75,7 @@ describe('Añadir nueva kata', () => {
   });
 
   describe('Editar kata', () => {
-    it('Se verifica que se haya editado el nombre de un kata correctamente', () => {
+    it('Se verifica que se haya editado  un kata correctamente', () => {
       cy.visit("/");
       cy.get('.contenedor-kata').first().as('kata');
       cy.get('@kata').contains('Editar').click();
@@ -89,5 +89,3 @@ describe('Añadir nueva kata', () => {
       cy.get('@kata').contains('Confirmar').click();     
     });
   });
-
-
