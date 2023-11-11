@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         contenedorKata.appendChild(createElement("h4", kata.getNombre()));
         contenedorKata.appendChild(createElement("p", kata.getDescripcion()));
-        contenedorKata.appendChild(createElement("p", `Dificultad: ${kata.getDificultad()}`));
+        contenedorKata.appendChild(createElement("span", `Dificultad: ${kata.getDificultad()}`));
         // Eliminar una kata
         const btnEliminar = createElement("button", "Eliminar");
         btnEliminar.addEventListener("click", function () {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateKataView(contenedorKata, nuevoNombre, nuevaDescripcion, nuevaDificultad) {
         const nombreElement = contenedorKata.querySelector("h4");
         const descripcionElement = contenedorKata.querySelector("p:nth-child(2)");
-        const dificultadElement = contenedorKata.querySelector("p:nth-child(3)");
+        const dificultadElement = contenedorKata.querySelector("span:nth-child(3)");
     
         nombreElement.textContent = nuevoNombre;
         descripcionElement.textContent = nuevaDescripcion;

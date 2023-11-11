@@ -58,6 +58,11 @@ body {
   margin-right: 25px;  
 }
 
+.contenedor-kata span {
+  margin-left: 50px;
+  margin-right: 25px;  
+}
+
 footer {
   font-family: "Trebuchet MS"; 
   font-size:17px; 
