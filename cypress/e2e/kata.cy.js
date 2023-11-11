@@ -29,4 +29,12 @@ describe("Buscar Katas", () => {
         cy.get('#btn_busqueda').click();
         cy.get('.contenedor-kata').find('p').should('have.text', 'Cree una calculadora simple que tome una cadena con hasta dos números, separados por comas, y devuelve un número entero de la operacion especifica');
     });
+
+    it("Se filtran resultados segun los criterios de búsqueda (dificultad)", () => {
+        cy.visit("/");
+        cy.get('#tipo_busqueda').select("dificultad");
+        cy.get('#dificultadBusqueda').type("facil");
+        cy.get('#btn_busqueda').click();
+        cy.get('.contenedor-kata').find('span').should('have.text', 'Dificultad: Fácil');
+    });
 });
