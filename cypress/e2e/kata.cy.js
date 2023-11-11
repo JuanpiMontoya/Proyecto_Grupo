@@ -12,3 +12,13 @@ describe("Mostrar Katas", () => {
         });
     });
 });
+
+describe("Buscar Katas", () => {
+    it("Se filtran resultados segun los criterios de búsqueda", () => {
+        cy.visit("/");
+        cy.get('#tipo_busqueda').select("nombre");
+        cy.get('#busqueda').type("Calculadora");
+        cy.get('#btn_busqueda').click();
+        cy.get('.contenedor-kata').find('h4').should('have.text', 'Kata - Calculadora String');
+    });
+});
