@@ -141,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
         const busqueda = event.target.elements["busqueda"].value;
         const tipoBusqueda = event.target.elements["tipo_busqueda"].value;
+        const busquedaDificultad = event.target.elements["dificultadBusqueda"].value;
     
         let katasFiltradas;
     
@@ -149,7 +150,9 @@ document.addEventListener("DOMContentLoaded", function() {
         } else if (tipoBusqueda === "descripcion") {
             katasFiltradas = lista_Katas.buscar_Descripcion(busqueda);
         } else if (tipoBusqueda === "dificultad") {
-            katasFiltradas = lista_Katas.buscar_Dificultad(busqueda);
+            if(busquedaDificultad === "facil"){ katasFiltradas = lista_Katas.buscar_Dificultad("Fácil"); }
+            else if(busquedaDificultad === "media"){ katasFiltradas = lista_Katas.buscar_Dificultad("Media"); }
+            else if(busquedaDificultad === "dificil"){ katasFiltradas = lista_Katas.buscar_Dificultad("Difícil"); }
         } else {
             katasFiltradas = [];
         }
