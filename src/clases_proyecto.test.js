@@ -1,5 +1,6 @@
 import ListaDeKatas from "./Lista_Katas.js";
 import Usuario from "./Usuario.js";
+import assert from 'assert';
 
 describe("Katas", () => {
   it("Se permite meter un nombre de kata al proyecto", () => {
@@ -152,5 +153,11 @@ describe("Crear Usuario", () => {
   it("Se permite crear un nuevo usuario en el sitio ingresando nombre", () => { 
     const NuevoUs = new Usuario("Santiago");
     expect(NuevoUs.getNombre()).toContain("Santiago"); 
-   }); 
+  }); 
+
+  it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
+    const NuevoUs = new Usuario("Guille");
+    NuevoUs.agregarUsuario(NuevoUs);
+    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.getNombre() === NuevoUs.getNombre()));
+  });
 }); 
