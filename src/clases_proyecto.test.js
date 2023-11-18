@@ -1,5 +1,5 @@
 import ListaDeKatas from "./Lista_Katas.js";
-
+import Usuario from "./Usuario.js";
 
 describe("Katas", () => {
   it("Se permite meter un nombre de kata al proyecto", () => {
@@ -114,6 +114,7 @@ describe("Eliminar Katas", () => {
 
 
 });
+
 describe("Editar Katas", () => {
   it("Se permite actualizar el nombre de kata seleccionada", () => { 
     const lista = new ListaDeKatas();
@@ -145,4 +146,11 @@ describe("Editar Katas", () => {
     expect(kata_a_editar.getNombre()).toContain("COBO"); 
    });
 
+}); 
+
+describe("Crear Usuario", () => {
+  it("Se permite crear un nuevo usuario en el sitio ingresando nombre", () => { 
+    const NuevoUs = new Usuario("Santiago");
+    expect(NuevoUs.getNombre()).toContain("Santiago"); 
+   }); 
 }); 
