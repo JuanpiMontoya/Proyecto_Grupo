@@ -164,6 +164,11 @@ describe("Crear Usuario", () => {
   it("Se permite crear un nuevo usuario en el sitio ingresando nombre y contraseña", () => { 
     const NuevoUs = new Usuario("Santiago","TDD123");
     expect(NuevoUs.getContraseña()).toContain("TDD123"); 
-  }); 
-
+  });
+  
+  it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
+    const NuevoUs = new Usuario("Paola","LWO999");
+    NuevoUs.agregarUsuario(NuevoUs);
+    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.getContraseña() === NuevoUs.getContraseña()));
+  });
 }); 
