@@ -20,7 +20,7 @@ describe("Creacion Usuario", () => {
 });
 
 describe("Iniciar sesion usuario", () => {
-  it("Se verifica si se el usuario ingresado con nombre y contraseña puede iniciar sesion", () => {
+  it("Se verifica si el usuario ingresado con nombre puede iniciar sesion", () => {
     cy.visit('registro.html');
     cy.get('#botonRegistro').click();
     cy.get('#nombreReg').type("Daniela");
@@ -29,7 +29,22 @@ describe("Iniciar sesion usuario", () => {
     cy.get('#guardar-Reg').click();
     cy.get('#botonIniciarSesion').click();
     cy.get('#nombreIn').type("Daniela");
+    cy.get('#contraIn').type("Monps4590");
     cy.get('#Inicio-Sesion').click();
     cy.get('#resultadosUs').should('have.text', 'El usuario con nombre Daniela se ingresó correctamente');
+  });
+
+  it("Se verifica error con el usuario ingresando nombre y contraseña", () => {
+    cy.visit('registro.html');
+    cy.get('#botonRegistro').click();
+    cy.get('#nombreReg').type("Mariano");
+    cy.get('#contraReg').type("nyl7634");
+    cy.get('#confirmarContra').type("nyl7634");
+    cy.get('#guardar-Reg').click();
+    cy.get('#botonIniciarSesion').click();
+    cy.get('#nombreIn').type("Mariano");
+    cy.get('#contraIn').type("nyl7634");
+    cy.get('#Inicio-Sesion').click();
+    cy.get('#resultadosUs').should('not.have.text', 'El usuario con nombre Mariano se ingresó correctamente');
   });
 });

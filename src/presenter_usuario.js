@@ -13,6 +13,7 @@ const inicioButton = document.getElementById('botonIniciarSesion');
 const contInicio = document.getElementById('overlay-Inicio');
 const inicioSesion = document.getElementById('Inicio-Sesion');
 const nombreInicio = document.getElementById('nombreIn');
+const contraseñaInicio = document.getElementById('contraIn');
 const salirIn = document.getElementById('salir-In');
 
 const resultadosUsuario = document.getElementById('resultadosUs');
@@ -78,9 +79,10 @@ guardarRegistro.addEventListener('click', () => {
 
 inicioSesion.addEventListener('click', () => {
     const nombreIngresado = nombreInicio.value.trim();
-    if (nombreIngresado !== '') {
+    const contraIngresada = contraseñaInicio.value.trim();
+    if (nombreIngresado !== '' && contraIngresada != '') {
         for (const usuarioRegistrado of usuariosGuardados) {
-            if (nombreIngresado === usuarioRegistrado.nombre) {
+            if (nombreIngresado === usuarioRegistrado.nombre && contraIngresada === usuarioRegistrado.contraseña) {
                 contInicio.style.display = 'none';
                 resultadosUsuario.textContent = 'El usuario con nombre ' + nombreIngresado + ' se ingresó correctamente';
                 setTimeout(() => {
@@ -89,8 +91,8 @@ inicioSesion.addEventListener('click', () => {
                 //window.location.href = 'index.html';
             }
         }
-        alert('El Nombre de usuario no se encontro o no esta registrado');
+        alert('El usuario no se encontro o no esta registrado');
     } else {
-        alert('El nombre para iniciar sesión no puede estar vacío');
+        alert('El nombre y/o contraseña para iniciar sesión no puede estar vacío');
     }
 });
