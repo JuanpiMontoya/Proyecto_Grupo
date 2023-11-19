@@ -1,16 +1,22 @@
 import usuario from "./usuario.js";
 
+//elementos registrar usuario
 const registrarseButton = document.getElementById('botonRegistro');
-const salirReg = document.getElementById('salir-Reg');
-const guardarRegistro = document.getElementById('guardar-Reg');
 const contRegistro = document.getElementById('overlay-Registro');
+const guardarRegistro = document.getElementById('guardar-Reg');
 const nombreRegistro = document.getElementById('nombreReg');
-const resultadosUsuario = document.getElementById('resultadosUs');
+const contraRegistro = document.getElementById('contraReg');
+const confirmarContraseña = document.getElementById('confirmarContra');
+const salirReg = document.getElementById('salir-Reg');
+//elementos inicio de sesion
 const inicioButton = document.getElementById('botonIniciarSesion');
 const contInicio = document.getElementById('overlay-Inicio');
-const salirIn = document.getElementById('salir-In');
 const inicioSesion = document.getElementById('Inicio-Sesion');
 const nombreInicio = document.getElementById('nombreIn');
+const salirIn = document.getElementById('salir-In');
+
+const resultadosUsuario = document.getElementById('resultadosUs');
+
 
 let usuariosGuardados;
 let nuevoUsuario;
@@ -45,21 +51,28 @@ salirIn.addEventListener('click', () => {
 
 guardarRegistro.addEventListener('click', () => {
     const nombreUsNuevo = nombreRegistro.value.trim();
-    if (nombreUsNuevo !== '') {
-        // Creamos el nuevo usuario y lo agregamos
-        nuevoUsuario = new usuario(nombreUsNuevo);
-        nuevoUsuario.agregarUsuario();
-        usuariosGuardados.push({ nombre: nombreUsNuevo });
+    const contraUsNuevo = contraRegistro.value.trim();
+    const confirmarUsNuevo = confirmarContraseña.value.trim();
+    if (nombreUsNuevo !== '' && contraUsNuevo !== '' && confirmarUsNuevo !== '' ) {
+        if(contraUsNuevo == confirmarUsNuevo){
+            // Creamos el nuevo usuario y lo agregamos
+            nuevoUsuario = new usuario(nombreUsNuevo);
+            nuevoUsuario.agregarUsuario();
+            usuariosGuardados.push({ nombre: nombreUsNuevo , contraseña: contraUsNuevo});
 
-        // Mensaje de registro correcto
-        contRegistro.style.display = 'none';
-        resultadosUsuario.textContent ='El usuario con nombre '+nombreUsNuevo+' se registro';
-        localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
-        setTimeout(() => {
-            resultadosUsuario.textContent = '';
-        }, 4000);
+            // Mensaje de registro correcto
+            contRegistro.style.display = 'none';
+            resultadosUsuario.textContent ='El usuario con nombre '+nombreUsNuevo+' se registro';
+            localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+            setTimeout(() => {
+                resultadosUsuario.textContent = '';
+            }, 4000);
+        }
+        else{
+            alert('Error al ingresar contraseña');
+        }
     } else {
-        console.log('El nombre registrado no puede estar vacío');
+        alert('El nombre y/o contraseña registrada no puede estar vacío');
     }
 });
 
@@ -76,8 +89,8 @@ inicioSesion.addEventListener('click', () => {
                 //window.location.href = 'index.html';
             }
         }
-        console.log('El Nombre de usuario no se encontro o no esta registrado');
+        alert('El Nombre de usuario no se encontro o no esta registrado');
     } else {
-        console.log('El nombre para iniciar sesión no puede estar vacío');
+        alert('El nombre para iniciar sesión no puede estar vacío');
     }
 });
