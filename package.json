@@ -4,7 +4,7 @@
   "description": "",
   "default": "index.html",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel registro.html",
     "build": "parcel build index.html",
     "test": "jest --watch",
     "test-once": "jest --verbose --coverage",
@@ -26,4 +26,5 @@
   "dependencies": {
     "chai": "^4.3.10"
   }
+  
 }
