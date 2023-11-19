@@ -1,5 +1,5 @@
 import ListaDeKatas from "./Lista_Katas.js";
-import Usuario from "./Usuario.js";
+import usuario from "./usuario.js";
 import assert from 'assert';
 
 describe("Katas", () => {
@@ -151,24 +151,24 @@ describe("Editar Katas", () => {
 
 describe("Crear Usuario", () => {
   it("Se permite crear un nuevo usuario en el sitio ingresando nombre", () => { 
-    const NuevoUs = new Usuario("Santiago");
+    const NuevoUs = new usuario("Santiago");
     expect(NuevoUs.getNombre()).toContain("Santiago"); 
   }); 
 
   it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
-    const NuevoUs = new Usuario("Guille");
-    NuevoUs.agregarUsuario(NuevoUs);
-    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.getNombre() === NuevoUs.getNombre()));
+    const NuevoUs = new usuario("Guille");
+    NuevoUs.agregarUsuario();
+    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.nombre === NuevoUs.getNombre()));
   });
 
   it("Se permite crear un nuevo usuario en el sitio ingresando nombre y contraseña", () => { 
-    const NuevoUs = new Usuario("Santiago","TDD123");
+    const NuevoUs = new usuario("Santiago","TDD123");
     expect(NuevoUs.getContraseña()).toContain("TDD123"); 
   });
   
   it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
-    const NuevoUs = new Usuario("Paola","LWO999");
-    NuevoUs.agregarUsuario(NuevoUs);
-    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.getContraseña() === NuevoUs.getContraseña()));
+    const NuevoUs = new usuario("Paola","LWO999");
+    NuevoUs.agregarUsuario();
+    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.contraseña === NuevoUs.getContraseña()));
   });
 }); 

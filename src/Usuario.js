@@ -1,6 +1,6 @@
 const usuariosRegistrados= [];
 
-class Usuario {
+class usuario {
     constructor(nombre,contraseña) {
       this.nombre = nombre;
       this.contraseña = contraseña;
@@ -11,12 +11,12 @@ class Usuario {
     getContraseña() {
       return this.contraseña;
     }
-    agregarUsuario(nuevoUsuario) {
-      usuariosRegistrados.push(nuevoUsuario);
+    agregarUsuario() {
+      usuariosRegistrados.push({ nombre: this.nombre, contraseña: this.contraseña });
     } 
     getUsuariosRegistrados() {
       return usuariosRegistrados;
     }
 }
 
-export default Usuario;
+export default usuario;
