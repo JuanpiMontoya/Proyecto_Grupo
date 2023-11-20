@@ -1,4 +1,4 @@
-const cursos= [];
+const cursosDisponibles= [];
 
 class curso {
     constructor(nombre) {
@@ -6,6 +6,12 @@ class curso {
     }
     getNombre() {
         return this.nombre;
+    }
+    agregarCurso(){
+        cursosDisponibles.push({ nombre: this.nombre }); 
+    }
+    getCursosDisponibles(){
+        return cursosDisponibles;
     }
 }
 
