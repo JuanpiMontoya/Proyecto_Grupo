@@ -88,10 +88,9 @@ inicioSesion.addEventListener('click', () => {
                 setTimeout(() => {
                     resultadosUsuario.textContent = '';
                 }, 4000);
-                //window.location.href = 'index.html';
+                window.location.href = 'index.html';
             }
-        }
-        alert('El usuario no se encontro o no esta registrado');
+        }   
     } else {
         alert('El nombre y/o contraseña para iniciar sesión no puede estar vacío');
     }

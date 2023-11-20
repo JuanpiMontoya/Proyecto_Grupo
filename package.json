@@ -4,10 +4,13 @@
   "description": "",
   "default": "index.html",
   "scripts": {
-    "start": "parcel registro.html",
+    "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "jest --watch",
     "test-once": "jest --verbose --coverage",
+    "test:usuario": "cypress run --spec cypress/integration/usuario.cy.js",
+    "test:kata": "cypress run --spec cypress/integration/kata.cy.js",
+    "test:all": "npm run test:usuario && npm run test:kata",
     "cypress": "cypress open",
     "cypress-run": "cypress run"
   },
