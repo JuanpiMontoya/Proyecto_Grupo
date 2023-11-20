@@ -206,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
             nuevoUsuario = new usuario(usuarioGuardado.nombre);
             nuevoUsuario.agregarUsuario();
         }
+        mostrarUsuarios();
 });
 
 //elementos registrar usuario
@@ -226,6 +227,7 @@ const contraseñaInicio = document.getElementById('contraIn');
 const salirIn = document.getElementById('salir-In');
 
 const resultadosUsuario = document.getElementById('resultadosUs');
+const divMostrarUsuarios = document.getElementById('mostrarUsuarios');
 
 
 let usuariosGuardados;
@@ -292,3 +294,21 @@ inicioSesion.addEventListener('click', () => {
         alert('El nombre y/o contraseña para iniciar sesión no puede estar vacío');
     }
 });
+
+function mostrarUsuarios() {
+    divMostrarUsuarios.innerHTML = '';
+    let tipoUs;
+    usuariosGuardados.forEach(usuario => {
+        const usuarioDiv = document.createElement('div');
+        if(usuario.tipo == undefined)
+        {
+            tipoUs = "Desconocido"
+        }
+        else
+        {
+            tipoUs = usuario.tipo
+        }
+        usuarioDiv.textContent = `Nombre: ${usuario.nombre}, Tipo: ${tipoUs}`;
+        divMostrarUsuarios.appendChild(usuarioDiv);
+    });
+}
