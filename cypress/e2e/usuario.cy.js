@@ -49,3 +49,37 @@ describe("Iniciar sesion usuario", () => {
     cy.get('#resultadosUs').should('not.have.text', 'El usuario con nombre Mariano se ingresó correctamente');
   });
 });
+
+describe("Iniciar sesion usuario", () => {
+  it("Se verifica la identificacion del usuario ingresado para estudiante y docente", () => {
+    cy.visit('/');
+    cy.get('#botonRegistro').click();
+    cy.get('#nombreReg').type("Saturnino");
+    cy.get('#tipoReg').select('Estudiante');
+    cy.get('#tipoReg').should('have.value', 'Estudiante');
+    cy.get('#contraReg').type("pads111");
+    cy.get('#confirmarContra').type("pads111");
+    cy.get('#guardar-Reg').click();
+    cy.get('#botonIniciarSesion').click();
+    cy.get('#nombreIn').type("Saturnino");
+    cy.get('#contraIn').type("pads111");
+    cy.get('#Inicio-Sesion').click();
+    cy.get('#resultadosUs').should('have.text', 'El usuario con nombre Saturnino se ingresó correctamente');
+  });
+
+  it("Se verifica la identificacion del usuario ingresado para docente", () => {
+    cy.visit('/');
+    cy.get('#botonRegistro').click();
+    cy.get('#nombreReg').type("Nemesio");
+    cy.get('#tipoReg').select('Docente');
+    cy.get('#tipoReg').should('have.value', 'Docente');
+    cy.get('#contraReg').type("bypass2333");
+    cy.get('#confirmarContra').type("bypass2333");
+    cy.get('#guardar-Reg').click();
+    cy.get('#botonIniciarSesion').click();
+    cy.get('#nombreIn').type("Nemesio");
+    cy.get('#contraIn').type("bypass2333");
+    cy.get('#Inicio-Sesion').click();
+    cy.get('#resultadosUs').should('have.text', 'El usuario con nombre Nemesio se ingresó correctamente');
+  });
+});

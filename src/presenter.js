@@ -213,6 +213,7 @@ const registrarseButton = document.getElementById('botonRegistro');
 const contRegistro = document.getElementById('overlay-Registro');
 const guardarRegistro = document.getElementById('guardar-Reg');
 const nombreRegistro = document.getElementById('nombreReg');
+const tipoRegistro = document.getElementById('tipoReg');
 const contraRegistro = document.getElementById('contraReg');
 const confirmarContraseña = document.getElementById('confirmarContra');
 const salirReg = document.getElementById('salir-Reg');
@@ -248,6 +249,7 @@ salirIn.addEventListener('click', () => {
 
 guardarRegistro.addEventListener('click', () => {
     const nombreUsNuevo = nombreRegistro.value.trim();
+    const tipoUsNuevo = tipoRegistro.value.trim();
     const contraUsNuevo = contraRegistro.value.trim();
     const confirmarUsNuevo = confirmarContraseña.value.trim();
     if (nombreUsNuevo !== '' && contraUsNuevo !== '' && confirmarUsNuevo !== '' ) {
@@ -255,7 +257,7 @@ guardarRegistro.addEventListener('click', () => {
             // Creamos el nuevo usuario y lo agregamos
             nuevoUsuario = new usuario(nombreUsNuevo);
             nuevoUsuario.agregarUsuario();
-            usuariosGuardados.push({ nombre: nombreUsNuevo , contraseña: contraUsNuevo});
+            usuariosGuardados.push({ nombre: nombreUsNuevo , contraseña: contraUsNuevo, tipo: tipoUsNuevo});
 
             // Mensaje de registro correcto
             contRegistro.style.display = 'none';
