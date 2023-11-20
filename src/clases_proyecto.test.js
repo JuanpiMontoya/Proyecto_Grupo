@@ -1,5 +1,5 @@
 import ListaDeKatas from "./Lista_Katas.js";
-import usuario from "./usuario.js";
+import usuario from "./Usuario.js";
 import assert from 'assert';
 
 describe("Katas", () => {

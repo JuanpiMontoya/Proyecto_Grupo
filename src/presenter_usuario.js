@@ -1,4 +1,4 @@
-import usuario from "./usuario.js";
+import usuario from "./Usuario.js";
 
 //elementos registrar usuario
 const registrarseButton = document.getElementById('botonRegistro');
