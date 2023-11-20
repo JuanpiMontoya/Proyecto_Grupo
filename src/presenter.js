@@ -1,6 +1,8 @@
 import ListaDeKatas from "./Lista_Katas.js";
 import Kata from "./Kata.js";
 
+const IngresarUsr = document.querySelector("#btn_ingresar");
+
 document.addEventListener("DOMContentLoaded", function() {
     const cont_katas = document.querySelector("#katas-disponibles");
     const lista_Katas = new ListaDeKatas();
@@ -197,4 +199,8 @@ document.addEventListener("DOMContentLoaded", function() {
             formulario.style.display = 'none';
         });
 
+});
+
+IngresarUsr.addEventListener('click', () => {
+    window.location.href = 'registro.html';
 });
