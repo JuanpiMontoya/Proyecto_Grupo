@@ -1,10 +1,10 @@
-//Correcion nombre de archivo de Usuario.js a usuario.js para que funcionen las pruebas de github
 const usuariosRegistrados= [];
 
 class usuario {
-    constructor(nombre,contraseña) {
+    constructor(nombre,contraseña,tipo) {
       this.nombre = nombre;
       this.contraseña = contraseña;
+      this.tipo = tipo;
     }
     getNombre() {
         return this.nombre;
@@ -12,8 +12,11 @@ class usuario {
     getContraseña() {
       return this.contraseña;
     }
+    getTipo() {
+      return this.tipo;
+    }
     agregarUsuario() {
-      usuariosRegistrados.push({ nombre: this.nombre, contraseña: this.contraseña });
+      usuariosRegistrados.push({ nombre: this.nombre, contraseña: this.contraseña, tipo: this.tipo });
     } 
     getUsuariosRegistrados() {
       return usuariosRegistrados;

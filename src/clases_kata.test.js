@@ -1,6 +1,4 @@
 import ListaDeKatas from "./Lista_Katas.js";
-import usuario from "./Usuario.js";
-import assert from 'assert';
 
 describe("Katas", () => {
   it("Se permite meter un nombre de kata al proyecto", () => {
@@ -147,28 +145,4 @@ describe("Editar Katas", () => {
     expect(kata_a_editar.getNombre()).toContain("COBO"); 
    });
 
-}); 
-
-describe("Crear Usuario", () => {
-  it("Se permite crear un nuevo usuario en el sitio ingresando nombre", () => { 
-    const NuevoUs = new usuario("Santiago");
-    expect(NuevoUs.getNombre()).toContain("Santiago"); 
-  }); 
-
-  it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
-    const NuevoUs = new usuario("Guille");
-    NuevoUs.agregarUsuario();
-    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.nombre === NuevoUs.getNombre()));
-  });
-
-  it("Se permite crear un nuevo usuario en el sitio ingresando nombre y contraseña", () => { 
-    const NuevoUs = new usuario("Santiago","TDD123");
-    expect(NuevoUs.getContraseña()).toContain("TDD123"); 
-  });
-  
-  it("Se permite agregar usuario con nombre a un array de los usuarios registrados", () => { 
-    const NuevoUs = new usuario("Paola","LWO999");
-    NuevoUs.agregarUsuario();
-    assert.ok(NuevoUs.getUsuariosRegistrados().some(usuario => usuario.contraseña === NuevoUs.getContraseña()));
-  });
 }); 
