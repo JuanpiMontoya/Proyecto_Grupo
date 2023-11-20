@@ -1,3 +1,5 @@
+import curso from "./Curso";
+
 const usuariosRegistrados= [];
 
 class usuario {
@@ -20,6 +22,15 @@ class usuario {
     } 
     getUsuariosRegistrados() {
       return usuariosRegistrados;
+    }
+    crearCurso(nombreCurso){
+      const nuevoCurso = new curso(nombreCurso, this);
+      if(nuevoCurso.validarYagregar()){
+        alert("El curso se creó con éxito");
+      }
+      else{
+        alert("El curso no se pudo crear! Solo los Docentes pueden crear cursos");
+      }
     }
 }
 
