@@ -20,7 +20,6 @@
       <input type="text" id="busqueda" placeholder="Buscar katas">
       <button id="btn_busqueda" type="submit">Buscar</button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button id="btn_ingresar" type="submit">Ingresar</button>
       <select name="dificultad" id="dificultadBusqueda">
         <option value="facil">Fácil</option>
         <option value="media">Media</option>
@@ -46,6 +45,35 @@
         </select>
         <button type="submit">Añadir Kata</button>
     </form>
+    <hr>
+    <center>
+    <h3>Ingreso de usuario en TDD Labs</h3>
+    <button type="button" id="botonRegistro">Registrarse</button>
+    <button type="button" id="botonIniciarSesion">Iniciar sesión</button><br><br><br>
+    <span id="resultadosUs"></span><br><br>
+    </center>
+    <div id="overlay-Registro">
+      <div class="popup">
+        <h2>Ingrese su nombre completo:</h2>
+        <input type="text" id="nombreReg"> 
+        <h2>Ingrese tu contraseña y confirma la contraseña:</h2>  
+        <input type="password" id="contraReg"> &nbsp; <br><br>
+        <input type="password" id="confirmarContra">
+        <br><br>
+        <button type="button" id="salir-Reg">Cancelar</button>
+        <button  type="button" id="guardar-Reg">Guardar</button>
+    </div>
+    </div>
+    <div id="overlay-Inicio">
+      <div class="popup">
+          <h2>Inicie sesion con su nombre completo y contraseña:</h2>
+          <input type="text" id="nombreIn">&nbsp; <br><br>
+          <input type="password" id="contraIn">
+          <br><br>
+          <button type="button" id="salir-In">Cancelar</button>
+          <button  type="submit" id="Inicio-Sesion">Iniciar Sesion</button>
+      </div>
+    </div>
   </body>
   <script type="module" src="./src/presenter.js"></script>
   <footer>

@@ -1,7 +1,6 @@
 describe("Creacion Usuario", () => {
   it("Se verifica si se puede registrar un nuevo usuario con nombre y contraseña con error", () => {
       cy.visit('/');
-      cy.get('#btn_ingresar').click();
       cy.get('#botonRegistro').click();
       cy.get('#nombreReg').type("Augusto");
       cy.get('#botonRegistro').should('exist');
@@ -12,20 +11,18 @@ describe("Creacion Usuario", () => {
   });
   it("Se verifica si se puede registrar un nuevo usuario con nombre y contraseña sin error", () => {
     cy.visit('/');
-    cy.get('#btn_ingresar').click();
     cy.get('#botonRegistro').click();
     cy.get('#nombreReg').type("Augusto");
     cy.get('#contraReg').type("Parker775");
     cy.get('#confirmarContra').type("Parker775");
     cy.get('#guardar-Reg').click();
     cy.get('#resultadosUs').should('have.text', 'El usuario con nombre Augusto se registro');
-});
+  });
 });
 
 describe("Iniciar sesion usuario", () => {
   it("Se verifica si el usuario ingresado con nombre puede iniciar sesion", () => {
     cy.visit('/');
-    cy.get('#btn_ingresar').click();
     cy.get('#botonRegistro').click();
     cy.get('#nombreReg').type("Daniela");
     cy.get('#contraReg').type("Monps4590");
@@ -40,7 +37,6 @@ describe("Iniciar sesion usuario", () => {
 
   it("Se verifica error con el usuario ingresando nombre y contraseña", () => {
     cy.visit('/');
-    cy.get('#btn_ingresar').click();
     cy.get('#botonRegistro').click();
     cy.get('#nombreReg').type("Mariano");
     cy.get('#contraReg').type("nyl7634");
