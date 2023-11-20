@@ -13,4 +13,11 @@ describe("Crear Curso", () => {
         nuevoCurso.agregarCurso();
         assert.ok(nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre()));
     });
+
+    it("Se permite se permite crear un curso solo cuando se esta registrado como DOCENTE", () => { 
+        const nuevoUsr = new usuario("Din Djarin", "Th1sIsth3Way", "Docente");
+        const nuevoCurso = new curso("Ing. de software 2-23 UCB", nuevoUsr);
+        nuevoCurso.validarYagregar();
+        assert.ok(nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre()));
+    });
 });
