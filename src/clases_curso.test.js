@@ -20,4 +20,10 @@ describe("Crear Curso", () => {
         nuevoCurso.validarYagregar();
         assert.ok(nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre()));
     });
+    it("NO se permite se permite crear un curso cuando se esta registrado como Estudiante", () => { 
+        const nuevoUsr = new usuario("Grogu", "MandoR0ckz", "Estudiante");
+        const nuevoCurso = new curso("Ing. de software", nuevoUsr);
+        nuevoCurso.validarYagregar();
+        assert.ok(!nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre()));
+    });
 });
