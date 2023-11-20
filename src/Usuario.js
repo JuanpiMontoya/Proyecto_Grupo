@@ -1,3 +1,4 @@
+//Correcion nombre de archivo de Usuario.js a usuario.js para que funcionen las pruebas de github
 const usuariosRegistrados= [];
 
 class usuario {
