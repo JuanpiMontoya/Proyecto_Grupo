@@ -173,3 +173,18 @@ h2#mostrar-formulario:hover {
 #mostrarUsuarios div {
   margin-bottom: 10px; /* Espacio entre cada coincidencia */
 }
+
+#menu-cursos {
+  width: 200px;
+  padding: 16px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+#menu-cursos div {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+#menu-cursos div:hover {
+  background-color: #ddd;
+}

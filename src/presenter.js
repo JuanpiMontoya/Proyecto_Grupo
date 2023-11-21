@@ -209,6 +209,15 @@ document.addEventListener("DOMContentLoaded", function() {
             nuevoUsuario.agregarUsuario();
         }
         mostrarUsuarios();
+
+    //cursos creados
+    cursosGuardados = JSON.parse(localStorage.getItem('cursos')) || [];
+
+     // Recorrer la lista de cursos y agregarlos al menú lateral
+    cursosGuardados.forEach(function (curso) {
+        agregarCursoAlMenu(curso.nombre);
+    });
+
 });
 
 //elementos registrar usuario
@@ -227,6 +236,7 @@ const inicioSesion = document.getElementById('Inicio-Sesion');
 const nombreInicio = document.getElementById('nombreIn');
 const contraseñaInicio = document.getElementById('contraIn');
 const salirIn = document.getElementById('salir-In');
+const cerrarSesion = document.getElementById('botonCerrarSesion');
 
 const resultadosUsuario = document.getElementById('resultadosUs');
 const divMostrarUsuarios = document.getElementById('mostrarUsuarios');
@@ -298,6 +308,11 @@ inicioSesion.addEventListener('click', () => {
     }
 });
 
+cerrarSesion.addEventListener('click', () => {
+    usuarioActual = null;
+    resultadosUsuario.textContent = 'Has cerrado sesión';
+});
+
 function mostrarUsuarios() {
     divMostrarUsuarios.innerHTML = '';
     let tipoUs;
@@ -316,12 +331,15 @@ function mostrarUsuarios() {
     });
 }
 
+let cursosGuardados;
+
 //elementos crear curso
 const BtCrearCurso = document.getElementById("btn_crearcurso");
 const contCrearCurso = document.getElementById("overlay-Curso");
 const btAceptCrear = document.getElementById("bt_AceptCurso");
 const btCancelCrear = document.getElementById("bt_cancelCurso");
 const nombreCurso = document.getElementById("nombreCurso");
+const menuLateral = document.getElementById("menu-cursos");
 
 BtCrearCurso.addEventListener('click', () => {
     contCrearCurso.style.display = 'flex';
@@ -329,13 +347,30 @@ BtCrearCurso.addEventListener('click', () => {
 
 btCancelCrear.addEventListener('click', () => {
     contCrearCurso.style.display = 'none';
+    nombreCurso.value = "";
 });
 
 btAceptCrear.addEventListener('click', () =>{
     if (usuarioActual) {
         usuarioActual.crearCurso(nombreCurso.value.trim());
+        cursosGuardados.push({nombre: nombreCurso.value.trim(), propietario: usuarioActual.nombre});
+        localStorage.setItem('cursos', JSON.stringify(cursosGuardados));
         contCrearCurso.style.display = 'none';
+        nombreCurso.value = "";
     } else {
         alert('No hay usuario logeado. Inicia sesión antes de crear un curso.');
     }   
 });
+
+function agregarCursoAlMenu(nombreCurso) {
+    const nuevoCursoElemento = document.createElement('div');
+    nuevoCursoElemento.textContent = nombreCurso;
+    
+    // Agregar un evento de clic para realizar acciones cuando se hace clic en un curso
+    nuevoCursoElemento.addEventListener('click', function () {
+      // Aquí puedes implementar lógica para mostrar detalles del curso, etc.
+      alert(`Clic en el curso: ${nombreCurso}`);
+    });
+
+    menuLateral.appendChild(nuevoCursoElemento);
+}
