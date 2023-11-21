@@ -352,11 +352,16 @@ btCancelCrear.addEventListener('click', () => {
 
 btAceptCrear.addEventListener('click', () =>{
     if (usuarioActual) {
-        usuarioActual.crearCurso(nombreCurso.value.trim());
-        cursosGuardados.push({nombre: nombreCurso.value.trim(), propietario: usuarioActual.nombre});
-        localStorage.setItem('cursos', JSON.stringify(cursosGuardados));
-        contCrearCurso.style.display = 'none';
-        nombreCurso.value = "";
+        if(nombreCurso.value !== ''){
+            usuarioActual.crearCurso(nombreCurso.value.trim());
+            cursosGuardados.push({nombre: nombreCurso.value.trim(), propietario: usuarioActual.nombre});
+            localStorage.setItem('cursos', JSON.stringify(cursosGuardados));
+            contCrearCurso.style.display = 'none';
+            nombreCurso.value = "";
+        }
+        else{
+            alert("Faltan datos para crear el curso");
+        }
     } else {
         alert('No hay usuario logeado. Inicia sesión antes de crear un curso.');
     }   
