@@ -2,6 +2,8 @@ import ListaDeKatas from "./Lista_Katas.js";
 import Kata from "./Kata.js";
 import usuario from "./Usuario.js";
 
+let usuarioActual = null;
+
 document.addEventListener("DOMContentLoaded", function() {
     const cont_katas = document.querySelector("#katas-disponibles");
     const lista_Katas = new ListaDeKatas();
@@ -285,6 +287,7 @@ inicioSesion.addEventListener('click', () => {
             if (nombreIngresado === usuarioRegistrado.nombre && contraIngresada === usuarioRegistrado.contraseña) {
                 contInicio.style.display = 'none';
                 resultadosUsuario.textContent = 'El usuario con nombre ' + nombreIngresado + ' se ingresó correctamente';
+                usuarioActual = new usuario(usuarioRegistrado.nombre, usuarioRegistrado.contraseña, usuarioRegistrado.tipo);
                 setTimeout(() => {
                     resultadosUsuario.textContent = '';
                 }, 4000);
@@ -312,3 +315,27 @@ function mostrarUsuarios() {
         divMostrarUsuarios.appendChild(usuarioDiv);
     });
 }
+
+//elementos crear curso
+const BtCrearCurso = document.getElementById("btn_crearcurso");
+const contCrearCurso = document.getElementById("overlay-Curso");
+const btAceptCrear = document.getElementById("bt_AceptCurso");
+const btCancelCrear = document.getElementById("bt_cancelCurso");
+const nombreCurso = document.getElementById("nombreCurso");
+
+BtCrearCurso.addEventListener('click', () => {
+    contCrearCurso.style.display = 'flex';
+});
+
+btCancelCrear.addEventListener('click', () => {
+    contCrearCurso.style.display = 'none';
+});
+
+btAceptCrear.addEventListener('click', () =>{
+    if (usuarioActual) {
+        usuarioActual.crearCurso(nombreCurso.value.trim());
+        contCrearCurso.style.display = 'none';
+    } else {
+        alert('No hay usuario logeado. Inicia sesión antes de crear un curso.');
+    }   
+});
