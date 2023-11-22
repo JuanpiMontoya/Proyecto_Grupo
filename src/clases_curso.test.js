@@ -36,4 +36,10 @@ describe("Inscribirse a un Curso", () => {
         assert.ok(nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()));
     });
 
+    it("NO se permite unirse a un curso si se es DOCENTE", () => { 
+        const nuevoCurso = new curso("Ing. de software 2");
+        const nuevoUsr = new usuario("Darth Vader", "1mURfather", "Docente");
+        nuevoCurso.inscribirAlumno(nuevoUsr);
+        assert.ok(!nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()));
+    });
 });
