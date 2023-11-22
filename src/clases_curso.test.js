@@ -27,3 +27,13 @@ describe("Crear Curso", () => {
         assert.ok(!nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre()));
     });
 });
+
+describe("Inscribirse a un Curso", () => {
+    it("Se permite unirse a un curso", () => { 
+        const nuevoCurso = new curso("Ing. de software");
+        const nuevoUsr = new usuario("Anakin", "URmy3nemy", "Estudiante");
+        nuevoCurso.inscribirAlumno(nuevoUsr);
+        assert.ok(nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()));
+    });
+
+});

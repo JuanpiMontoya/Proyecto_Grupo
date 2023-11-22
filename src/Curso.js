@@ -4,6 +4,7 @@ class curso {
     constructor(nombre, propietario) {
       this.nombre = nombre;
       this.propietario = propietario;
+      this.inscritos = [];
     }
     getNombre() {
         return this.nombre;
@@ -20,6 +21,12 @@ class curso {
     }
     getCursosDisponibles(){
         return cursosDisponibles;
+    }
+    getInscritos(){
+        return this.inscritos;
+    }
+    inscribirAlumno(alumno){
+        this.inscritos.push(alumno);
     }
 }
 
