@@ -1,6 +1,7 @@
 import ListaDeKatas from "./Lista_Katas.js";
 import Kata from "./Kata.js";
 import usuario from "./Usuario.js";
+import curso from "./Curso.js";
 
 let usuarioActual = null;
 
@@ -202,19 +203,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Obtenemos la lista de usuarios guardados en localStorage (si existe)
         usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+        usuariosReconstruidos = usuariosGuardados.map(usr => new usuario(usr.nombre, usr.contraseña, usr.tipo));
 
         // Recorremos los usuarios guardados y creamos instancias para cada uno
-        for (const usuarioGuardado of usuariosGuardados) {
-            nuevoUsuario = new usuario(usuarioGuardado.nombre);
+        for (const usuarioGuardado of usuariosReconstruidos) {
+            nuevoUsuario = new usuario(usuarioGuardado.nombre, usuarioGuardado.contraseña, usuarioGuardado.tipo);
             nuevoUsuario.agregarUsuario();
         }
         mostrarUsuarios();
 
+
     //cursos creados
     cursosGuardados = JSON.parse(localStorage.getItem('cursos')) || [];
+    cursosInstanciados = cursosGuardados.map(cursoGuardado => new curso(cursoGuardado.nombre, cursoGuardado.propietario));
 
      // Recorrer la lista de cursos y agregarlos al menú lateral
-    cursosGuardados.forEach(function (curso) {
+    cursosInstanciados.forEach(function (curso) {
         agregarCursoAlMenu(curso.nombre);
     });
 
@@ -244,6 +248,7 @@ const divMostrarUsuarios = document.getElementById('mostrarUsuarios');
 
 let usuariosGuardados;
 let nuevoUsuario;
+let usuariosReconstruidos;
 
 registrarseButton.addEventListener('click', () => {
     contRegistro.style.display = 'flex';
@@ -269,14 +274,14 @@ guardarRegistro.addEventListener('click', () => {
     if (nombreUsNuevo !== '' && contraUsNuevo !== '' && confirmarUsNuevo !== '' ) {
         if(contraUsNuevo == confirmarUsNuevo){
             // Creamos el nuevo usuario y lo agregamos
-            nuevoUsuario = new usuario(nombreUsNuevo);
+            nuevoUsuario = new usuario(nombreUsNuevo, contraUsNuevo, tipoUsNuevo);
             nuevoUsuario.agregarUsuario();
-            usuariosGuardados.push({ nombre: nombreUsNuevo , contraseña: contraUsNuevo, tipo: tipoUsNuevo});
+            usuariosReconstruidos.push(nuevoUsuario);
 
             // Mensaje de registro correcto
             contRegistro.style.display = 'none';
             resultadosUsuario.textContent ='El usuario con nombre '+nombreUsNuevo+' se registro';
-            localStorage.setItem('usuarios', JSON.stringify(usuariosGuardados));
+            localStorage.setItem('usuarios', JSON.stringify(usuariosReconstruidos));
             setTimeout(() => {
                 resultadosUsuario.textContent = '';
             }, 4000);
@@ -293,16 +298,19 @@ inicioSesion.addEventListener('click', () => {
     const nombreIngresado = nombreInicio.value.trim();
     const contraIngresada = contraseñaInicio.value.trim();
     if (nombreIngresado !== '' && contraIngresada != '') {
-        for (const usuarioRegistrado of usuariosGuardados) {
-            if (nombreIngresado === usuarioRegistrado.nombre && contraIngresada === usuarioRegistrado.contraseña) {
-                contInicio.style.display = 'none';
-                resultadosUsuario.textContent = 'El usuario con nombre ' + nombreIngresado + ' se ingresó correctamente';
-                usuarioActual = new usuario(usuarioRegistrado.nombre, usuarioRegistrado.contraseña, usuarioRegistrado.tipo);
-                setTimeout(() => {
-                    resultadosUsuario.textContent = '';
-                }, 4000);
-            }
-        }   
+        const usuarioEncontrado = usuariosReconstruidos.find(usuario => 
+            nombreIngresado === usuario.nombre && contraIngresada === usuario.contraseña
+        );
+        if (usuarioEncontrado) {
+            contInicio.style.display = 'none';
+            resultadosUsuario.textContent = 'El usuario con nombre ' + nombreIngresado + ' se ingresó correctamente';
+            usuarioActual = usuarioEncontrado;
+            usuarioActual.__proto__ = usuario.prototype;
+            setTimeout(() => {
+                resultadosUsuario.textContent = '';
+            }, 4000);
+        }
+               
     } else {
         alert('El nombre y/o contraseña para iniciar sesión no puede estar vacío');
     }
@@ -316,7 +324,7 @@ cerrarSesion.addEventListener('click', () => {
 function mostrarUsuarios() {
     divMostrarUsuarios.innerHTML = '';
     let tipoUs;
-    usuariosGuardados.forEach(usuario => {
+    usuariosReconstruidos.forEach(usuario => {
         const usuarioDiv = document.createElement('div');
         if(usuario.tipo == undefined)
         {
@@ -332,6 +340,7 @@ function mostrarUsuarios() {
 }
 
 let cursosGuardados;
+let cursosInstanciados;
 
 //elementos crear curso
 const BtCrearCurso = document.getElementById("btn_crearcurso");
@@ -340,6 +349,10 @@ const btAceptCrear = document.getElementById("bt_AceptCurso");
 const btCancelCrear = document.getElementById("bt_cancelCurso");
 const nombreCurso = document.getElementById("nombreCurso");
 const menuLateral = document.getElementById("menu-cursos");
+const contInscribirse = document.getElementById("overlay-inscribirse");
+const btAceptInscripcion = document.getElementById("bt_AceptInscripcion");
+const btCancelInscripcion = document.getElementById("bt_cancelInscripcion");
+const nombreCursoPopup = document.getElementById("cursoPopup");
 
 BtCrearCurso.addEventListener('click', () => {
     contCrearCurso.style.display = 'flex';
@@ -353,9 +366,9 @@ btCancelCrear.addEventListener('click', () => {
 btAceptCrear.addEventListener('click', () =>{
     if (usuarioActual) {
         if(nombreCurso.value !== ''){
-            usuarioActual.crearCurso(nombreCurso.value.trim());
-            cursosGuardados.push({nombre: nombreCurso.value.trim(), propietario: usuarioActual.nombre});
-            localStorage.setItem('cursos', JSON.stringify(cursosGuardados));
+            const cursoNuevo = usuarioActual.crearCurso(nombreCurso.value.trim());
+            cursosInstanciados.push(cursoNuevo);
+            localStorage.setItem('cursos', JSON.stringify(cursosInstanciados));
             contCrearCurso.style.display = 'none';
             nombreCurso.value = "";
         }
@@ -370,12 +383,37 @@ btAceptCrear.addEventListener('click', () =>{
 function agregarCursoAlMenu(nombreCurso) {
     const nuevoCursoElemento = document.createElement('div');
     nuevoCursoElemento.textContent = nombreCurso;
-    
-    // Agregar un evento de clic para realizar acciones cuando se hace clic en un curso
+
+    // Agregar un evento de clic para almacenar el nombre del curso seleccionado
     nuevoCursoElemento.addEventListener('click', function () {
-      // Aquí puedes implementar lógica para mostrar detalles del curso, etc.
-      alert(`Clic en el curso: ${nombreCurso}`);
+        nombreCursoPopup.textContent = nombreCurso;
+        contInscribirse.style.display = 'flex';
     });
 
     menuLateral.appendChild(nuevoCursoElemento);
 }
+
+function inscribir() {
+    contInscribirse.style.display = 'none';
+    const nombreCurso = nombreCursoPopup.textContent;
+    let cursoEncontrado = encontrarCursoPorNombre(nombreCurso);
+    if (cursoEncontrado && cursoEncontrado.inscribirAlumno(usuarioActual)) {
+        console.log("Inscritos de " + cursoEncontrado.getNombre() + ": ", cursoEncontrado.getInscritos());
+        alert("Te inscribiste a " + nombreCursoPopup.textContent);
+        
+    } else {
+        alert("Debes estar logeado como Estudiante para inscribirte a un curso");
+    }
+    
+}
+
+function encontrarCursoPorNombre(nombreCurso) {
+    const cursoEncontrado = cursosInstanciados.find(curso => curso.nombre === nombreCurso);
+    return cursoEncontrado;
+}
+
+btAceptInscripcion.addEventListener('click', inscribir);
+
+btCancelInscripcion.addEventListener('click', () => {
+    contInscribirse.style.display = 'none';
+});

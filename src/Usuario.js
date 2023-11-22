@@ -27,9 +27,11 @@ class usuario {
       const nuevoCurso = new curso(nombreCurso, this);
       if(nuevoCurso.validarYagregar()){
         alert("El curso se creó con éxito");
+        return nuevoCurso;
       }
       else{
         alert("El curso no se pudo crear! Solo los Docentes pueden crear cursos");
+        return null;
       }
     }
 }
