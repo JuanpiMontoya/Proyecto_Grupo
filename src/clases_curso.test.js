@@ -33,5 +33,10 @@ describe("Crear Curso", () => {
         expect(nuevoCurso.getDescripcion()).toEqual("Este curso tiene el como fin practicar TDD");
     });
 
+    it("Se permite añadir un curso a un array de cursos (con nombre y descripcion) de la página", () => { 
+        const nuevoCurso = new curso("Ing. de software 2-23 UCB", "Este curso tiene el como fin practicar TDD");
+        nuevoCurso.agregarCurso();
+        assert.ok(nuevoCurso.getCursosDisponibles().some(curso => curso.nombre === nuevoCurso.getNombre(), curso => curso.descripcion == nuevoCurso.getDescripcion()));
+    });
 
 });
