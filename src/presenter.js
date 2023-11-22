@@ -215,7 +215,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
      // Recorrer la lista de cursos y agregarlos al menú lateral
     cursosGuardados.forEach(function (curso) {
-        agregarCursoAlMenu(curso.nombre);
+        agregarCursoAlMenu(curso.nombre, curso.descripcion);
+       
+
     });
 
 });
@@ -339,6 +341,7 @@ const contCrearCurso = document.getElementById("overlay-Curso");
 const btAceptCrear = document.getElementById("bt_AceptCurso");
 const btCancelCrear = document.getElementById("bt_cancelCurso");
 const nombreCurso = document.getElementById("nombreCurso");
+const descripcionCurso = document.getElementById("descripcionCurso");
 const menuLateral = document.getElementById("menu-cursos");
 
 BtCrearCurso.addEventListener('click', () => {
@@ -348,16 +351,18 @@ BtCrearCurso.addEventListener('click', () => {
 btCancelCrear.addEventListener('click', () => {
     contCrearCurso.style.display = 'none';
     nombreCurso.value = "";
+    descripcionCurso.value = "";
 });
 
 btAceptCrear.addEventListener('click', () =>{
     if (usuarioActual) {
-        if(nombreCurso.value !== ''){
-            usuarioActual.crearCurso(nombreCurso.value.trim());
-            cursosGuardados.push({nombre: nombreCurso.value.trim(), propietario: usuarioActual.nombre});
+        if(nombreCurso.value !== '' || descripcionCurso.value !== ''){
+            usuarioActual.crearCurso(nombreCurso.value.trim(), descripcionCurso.value);
+            cursosGuardados.push({nombre: nombreCurso.value.trim(), descripcion: descripcionCurso.value, propietario: usuarioActual.nombre});
             localStorage.setItem('cursos', JSON.stringify(cursosGuardados));
             contCrearCurso.style.display = 'none';
             nombreCurso.value = "";
+            descripcionCurso.value = "";
         }
         else{
             alert("Faltan datos para crear el curso");
@@ -367,15 +372,23 @@ btAceptCrear.addEventListener('click', () =>{
     }   
 });
 
-function agregarCursoAlMenu(nombreCurso) {
+function agregarCursoAlMenu(nombreCurso, descripcionCurso) {
     const nuevoCursoElemento = document.createElement('div');
     nuevoCursoElemento.textContent = nombreCurso;
-    
+
+    // Guardar la descripción como un atributo de datos en el elemento
+    nuevoCursoElemento.dataset.descripcion = descripcionCurso;
+
     // Agregar un evento de clic para realizar acciones cuando se hace clic en un curso
     nuevoCursoElemento.addEventListener('click', function () {
-      // Aquí puedes implementar lógica para mostrar detalles del curso, etc.
-      alert(`Clic en el curso: ${nombreCurso}`);
+        // Obtener la descripción del curso al hacer clic en el elemento
+        const descripcion = nuevoCursoElemento.dataset.descripcion;
+        // Implementar la lógica para mostrar detalles del curso
+        alert(`Nombre del curso: ${nombreCurso}\nDescripción: ${descripcion}`);
     });
 
     menuLateral.appendChild(nuevoCursoElemento);
 }
+
+
+

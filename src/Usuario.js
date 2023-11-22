@@ -23,8 +23,8 @@ class usuario {
     getUsuariosRegistrados() {
       return usuariosRegistrados;
     }
-    crearCurso(nombreCurso){
-      const nuevoCurso = new curso(nombreCurso, this);
+    crearCurso(nombreCurso, descripcionCurso){
+      const nuevoCurso = new curso(nombreCurso, descripcionCurso);
       if(nuevoCurso.validarYagregar()){
         alert("El curso se creó con éxito");
       }
