@@ -27,7 +27,9 @@ class curso {
     }
     inscribirAlumno(alumno){
         if(alumno && alumno.getTipo() && alumno.getTipo() === "Estudiante"){
-            this.inscritos.push(alumno);
+            if (!this.inscritos.some(user => user.getNombre() === alumno.getNombre() && user.getContraseña() === alumno.getContraseña())) {
+                this.inscritos.push(alumno);
+            }
         }
 
     }

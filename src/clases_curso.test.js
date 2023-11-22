@@ -42,4 +42,19 @@ describe("Inscribirse a un Curso", () => {
         nuevoCurso.inscribirAlumno(nuevoUsr);
         assert.ok(!nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()));
     });
+
+    it("Se permite unirse a un curso solo una vez", () => { 
+        const nuevoCurso = new curso("Testing");
+        const nuevoUsr = new usuario("Kylo Ren", "0utOfth3Sky", "Estudiante");
+        // Verificar que el usuario no esté inscrito antes de la primera inscripción
+        assert.ok(!nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre()));
+        // Inscribir al usuario por primera vez
+        nuevoCurso.inscribirAlumno(nuevoUsr);
+        // Verificar que el usuario esté inscrito después de la primera inscripción
+        assert.ok(nuevoCurso.getInscritos().some(inscrito => inscrito.nombre === nuevoUsr.getNombre()));
+        // Intentar inscribir al usuario por segunda vez
+        nuevoCurso.inscribirAlumno(nuevoUsr);
+        // Verificar que el usuario no esté inscrito más de una vez
+        assert.equal(nuevoCurso.getInscritos().filter(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()).length, 1);
+    });
 });
