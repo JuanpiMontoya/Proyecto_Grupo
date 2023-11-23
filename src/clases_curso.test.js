@@ -57,4 +57,19 @@ describe("Inscribirse a un Curso", () => {
         // Verificar que el usuario no esté inscrito más de una vez
         assert.equal(nuevoCurso.getInscritos().filter(inscrito => inscrito.nombre === nuevoUsr.getNombre() && inscrito.contraseña === nuevoUsr.getContraseña()).length, 1);
     });
+
+
+
+});
+
+
+describe("Añadir descripcion a curso", () => {
+    
+    it("Se permite crear un nuevo curso añádiendo su descripcion", () => { 
+        const nuevoCurso = new curso("Ing. de software 2-23 UCB", "Esta kata tiene como fin ayudarte a...");
+        expect(nuevoCurso.getDescripcion()).toEqual("Esta kata tiene como fin ayudarte a...");
+    });
+
+
+    
 });

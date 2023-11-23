@@ -1,14 +1,20 @@
 const cursosDisponibles= [];
 
 class curso {
-    constructor(nombre, propietario) {
+    constructor(nombre, descripcion, propietario) {
       this.nombre = nombre;
+      this.descripcion = descripcion;
       this.propietario = propietario;
       this.inscritos = [];
     }
     getNombre() {
         return this.nombre;
     }
+
+    getDescripcion(){
+        return this.descripcion;
+    }
+
     agregarCurso(){ 
         cursosDisponibles.push({ nombre: this.nombre }); 
     }
